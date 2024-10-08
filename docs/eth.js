@@ -31,11 +31,12 @@ export class Web3Provider {
   onConnectCbs = []
   ens = ''
 
-  FORCED_CHAIN_ID = '0x1'
+  FORCED_CHAIN_ID = '0x7a69'
   VALID_CHAINS = [
-    '0x1', // mainnet
+    // '0x1', // mainnet
     // '0xaa36a7', // sepolia
-    '0x7a69' // local
+    '0x7a69', // local
+    // '0x2105' // base
   ]
 
   hasConnected = false
@@ -64,6 +65,7 @@ export class Web3Provider {
 
             this.hasConnected = true
             const currentChain = await this.currentChain()
+            console.log(currentChain)
             if (addr && !this.VALID_CHAINS.includes(currentChain)) {
               await this.switchChain(this.FORCED_CHAIN_ID)
             }
@@ -103,6 +105,8 @@ export class Web3Provider {
   }
 
   async switchChain(chainId) {
+    if (!chainId) return
+
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId }],

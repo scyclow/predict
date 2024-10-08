@@ -44,13 +44,178 @@ TODO
   <link rel="stylesheet" type="text/css" href="./styles.css">
 
   <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--font-color);
+      font-family: sans-serif;
+    }
+
+    h1, h2, h3, h4 {
+      text-align: center;
+    }
+
+    .spaceEvenly {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      margin: 1.5em 0;
+    }
+
+    h1 {
+      font-size: 6em;
+    }
+    header {
+      font-size: 3em;
+    }
+
+    #connectButton {
+      cursor: pointer;
+      background: var(--font-color);
+      color: var(--bg-color);
+      border: 1px solid;
+      border-radius: 3px;
+      font-size: 2em;
+      padding: 0.5em 1em;
+      transition: 200ms;
+    }
+
+    #connectButton:hover {
+      background: var(--bg-color);
+      color: var(--font-color);
+    }
 
 
+    .buyTable {
+      border: 1em double;
+      padding: 1em;
+      font-size: 1.3em;
+      margin: 0em auto;
+      margin-top: 4em;
+      border-spacing:  0;
+    }
+
+    .buyTable tbody tr {
+      cursor: pointer;
+    }
+
+    .buyTable tbody tr:hover, .buyTable tbody tr.active {
+      background: var(--font-color);
+      color: var(--bg-color);
+    }
+
+    .buyTable th {
+      text-decoration: underline;
+    }
+
+    .buyTable td {
+      padding: 0.25em;
+    }
+    .buyTable td:first-child {
+      padding-right: 1em;
+    }
+
+
+    .growShrinkSmall {
+      animation: GrowShrinkSmall 3s cubic-bezier(0.58, 0.06, 0.44, 0.98) infinite;
+    }
+    .growShrink {
+      animation: GrowShrink 1s cubic-bezier(0.58, 0.06, 0.44, 0.98) infinite;
+    }
+
+    @keyframes GrowShrink {
+      0%, 100% {
+        transform: scale(2.75) rotate(-10deg);
+      }
+      50% {
+        transform: scale(0.75) rotate(10deg);
+      }
+    }
+
+    @keyframes GrowShrinkSmall {
+      0%, 100% {
+        transform: scale(1.1) ;
+      }
+      50% {
+        transform: scale(0.9) ;
+      }
+    }
+
+    .upDown {
+      animation: UpDown 1.75s cubic-bezier(0.58, 0.06, 0.44, 0.98) infinite;
+      display: inline-block;
+    }
+
+    @keyframes UpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(1em);
+      }
+    }
+
+    .blink {
+      animation: Blink 1s steps(2, start) infinite;
+    }
+
+    @keyframes Blink {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    .blinkShort {
+      animation: BlinkShort 1s linear infinite;
+    }
+
+    @keyframes BlinkShort {
+      0%, 20%, 40%, 60%, 100% {
+        opacity: 0;
+      }
+      75%,80%, 85% {
+        opacity: 1;
+
+      }
+    }
+
+    @media (max-width:  1060px) {
+      h1 {
+        font-size: 4em;
+        padding: 0.5em;
+      }
+    }
+    @media (max-width:  680px) {
+      h1 {
+        font-size: 3em;
+      }
+    }
+
+    @media (max-width:  400px) {
+      .buyTable {
+        font-size: 1em;
+      }
+    }
+
+  /*.hSiren {
+    animation: HSiren 3.5s linear infinite;
+    display: inline-block;
+    position: absolute;
+  }
+
+  @keyframes HSiren {
+    0% {transform: perspective(40em) rotate3d(0,2,0, 0deg) translateZ(2em)}
+    100% {transform: perspective(40em) rotate3d(0,2,0, 360deg) translateZ(2em)}
+  }*/
   </style>
 
 
   <script src="./utils.js"></script>
-  <script type="module" src="./modal.js"></script>
+  <!-- <script type="module" src="./modal.js"></script> -->
   <script type="module" src="./connectWallet.js"></script>
 
 
@@ -59,39 +224,97 @@ TODO
 </head>
 <body>
   <header>
+    <div class="spaceEvenly">
+      <span class="growShrink" style="">1</span>
+      <span class="growShrink" style="animation-delay: -.4s;">3</span>
+      <span class="growShrink" style="animation-delay: -0.8s;">5</span>
+    </div>
+
+    <div class="spaceEvenly">
+      <span class="growShrink" style="animation-delay: -0.2s;">2</span>
+      <span class="growShrink" style="animation-delay: -0.6s;">4</span>
+    </div>
 
 
-    <connect-wallet>
-      <div slot="noWeb3">
+    <!-- <h3 class="growShrinkSmall">Which One Will It Be?</h3> -->
 
-      </div>
-
-      <div slot="notConnected">
-        <connect-button>
-          <button id="connectButton" slot="button">Connect</button>
-        </connect-button>
-      </div>
-
-      <div slot="connected">
-      </div>
-    </connect-wallet>
 
 
 
   </header>
+  <h1 class="growShrinkSmall">Predict The Number</h1>
+
 
   <main>
+    <div style="font-size: 4em; display: flex; justify-content: center; margin-bottom: 1em;">
+      <span class="upDown" style="animation-delay: 0s">↓</span>
+      <span class="upDown" style="animation-delay: -0.25s">↓</span>
+      <span class="upDown" style="animation-delay: -0.5s">↓</span>
+      <span class="upDown" style="animation-delay: -0.75s">↓</span>
+      <span class="upDown" style="animation-delay: -1s">↓</span>
+      <span class="upDown" style="animation-delay: -1.25s">↓</span>
+      <span class="upDown" style="animation-delay: -1.5s">↓</span>
+    </div>
+
+    <section>
+
+    </section>
+
+
+
 
     <section>
       <connect-wallet>
 
         <div slot="noWeb3">
+          <h3>Please visit this page in a web3-enabled browser to predict the number</h3>
         </div>
 
         <div slot="notConnected">
+          <connect-button>
+            <button id="connectButton" slot="button">Connect</button>
+          </connect-button>
         </div>
 
         <div slot="connected">
+      <table class="buyTable">
+        <thead>
+          <tr>
+            <th>COIN:</th>
+            <th>PRICE*:</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr id="oneRow">
+            <td>1. $ONE</td>
+            <td>0.2000 ETH <span class="blinkShort" style="animation-delay: 0s">☜</span></td>
+          </tr>
+
+          <tr id="twoRow">
+            <td>2. $TWO</td>
+            <td>0.2000 ETH <span class="blinkShort" style="animation-delay: -.2s">☜</span></td>
+          </tr>
+
+          <tr id="threeRow">
+            <td>3. $THREE</td>
+            <td>0.2000 ETH <span class="blinkShort" style="animation-delay: -0.4s">☜</span></td>
+          </tr>
+
+          <tr id="fourRow">
+            <td>4. $FOUR</td>
+            <td>0.2000 ETH <span class="blinkShort" style="animation-delay: -.6s">☜</span></td>
+          </tr>
+
+          <tr id="fiveRow">
+            <td>5. $FIVE</td>
+            <td>0.2000 ETH <span class="blinkShort" style="animation-delay: -.8s">☜</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 class="blink">LIVE PRICES!</h4>
+      <h4>* Per 1000 Coins</h4>
         </div>
 
       </connect-wallet>
@@ -103,8 +326,8 @@ TODO
 
   <footer>
 
-    <div style="text-align:center; font-size: 2em; font-style: normal; margin: 2em;"><a href="https://discord.steviep.xyz" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Customer Support</a></div>
-    <div style="text-align:center; font-size: 2em; font-style: normal; margin: 2em;"><a href="https://steviep.xyz" target="_blank" style="color: var(--accent-color); text-decoration: underline;">steviep.xyz</a> (c) 2024</div>
+    <div style="text-align:center; font-style: normal; margin: 2em;"><a href="https://discord.steviep.xyz" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Customer Support</a></div>
+    <div style="text-align:center; font-style: normal; margin: 2em;"><a href="https://steviep.xyz" target="_blank" style="color: var(--accent-color); text-decoration: underline;">steviep.xyz</a> (c) 2024</div>
   </footer>
 
 
@@ -116,15 +339,42 @@ TODO
 <script type="module">
 
   import {$} from './$.js'
-  import {CONTRACTS} from './contract.js'
+  import {CONTRACTS} from './contracts.js'
   import {provider, etherscanAddr, bnToN, txValue, ethVal, isENS, ZERO_ADDR} from './eth.js'
 
 
   provider.setContractInfo(CONTRACTS)
 
+  let activeRow
+
+  function setRows() {
+    const rows = [
+      $.id('oneRow'),
+      $.id('twoRow'),
+      $.id('threeRow'),
+      $.id('fourRow'),
+      $.id('fiveRow'),
+    ]
+
+    console.log(rows)
+
+    let i = 0
+    for (let row of rows) {
+      i += 1
+      row.onclick = () => {
+        rows.forEach(r => r.classList.remove('active'))
+        row.classList.add('active')
+        console.log(i)
+        activeRow = i
+      }
+    }
+
+  }
+
 
   provider.onConnect(async (addr) => {
 
+    setRows()
     try {
       const contracts = await provider.getContracts()
 
