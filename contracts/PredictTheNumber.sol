@@ -1,27 +1,31 @@
 // SPDX-License-Identifier: MIT
 
 import "./Dependencies.sol";
-import "./PredictCoin.sol";
+import "./NumberCoin.sol";
 
 
 pragma solidity ^0.8.23;
 
-contract PredictBase is Ownable {
+contract PredictTheNumber is Ownable, ERC20 {
   int8 public chosenNumber;
-  PredictCoin public ONE;
-  PredictCoin public TWO;
-  PredictCoin public THREE;
-  PredictCoin public FOUR;
-  PredictCoin public FIVE;
+  NumberCoin public ONE;
+  NumberCoin public TWO;
+  NumberCoin public THREE;
+  NumberCoin public FOUR;
+  NumberCoin public FIVE;
 
   uint256 public constant PRIZE_PER_COIN = 0.0001 ether;
 
-  constructor() {
-    ONE = new PredictCoin('1', 'ONE');
-    TWO = new PredictCoin('2', 'TWO');
-    THREE = new PredictCoin('3', 'THREE');
-    FOUR = new PredictCoin('4', 'FOUR');
-    FIVE = new PredictCoin('5', 'FIVE');
+  constructor() ERC20('Predict Market Maker', 'PREDICT') {
+    ONE = new NumberCoin('1', 'ONE');
+    TWO = new NumberCoin('2', 'TWO');
+    THREE = new NumberCoin('3', 'THREE');
+    FOUR = new NumberCoin('4', 'FOUR');
+    FIVE = new NumberCoin('5', 'FIVE');
+  }
+
+  function NUMBER_PICKER() external view returns (address) {
+    return owner();
   }
 
   function pickNumber(int8 n) external onlyOwner {
@@ -31,19 +35,20 @@ contract PredictBase is Ownable {
     chosenNumber = n;
   }
 
-  function marketMake() external payable {
+  function create() external payable {
     require(chosenNumber == 0, 'Number already chosen');
 
-    uint256 coinsToMint = msg.value * 2000;
+    uint256 coinsToMint = msg.value * 10000;
     ONE.mint(msg.sender, coinsToMint);
     TWO.mint(msg.sender, coinsToMint);
     THREE.mint(msg.sender, coinsToMint);
     FOUR.mint(msg.sender, coinsToMint);
     FIVE.mint(msg.sender, coinsToMint);
+    _mint(msg.sender, coinsToMint);
   }
 
-  function redeem(int8 coin, uint256 amount) external {
-    require(coin == chosenNumber, 'Can only redeem coin for winning number');
+  function claim(int8 coin, uint256 amount) external {
+    require(coin == chosenNumber, 'Can only claim prize for winning number');
 
     if (coin == 1) {
       ONE.burn(msg.sender, amount);
@@ -57,12 +62,13 @@ contract PredictBase is Ownable {
       FIVE.burn(msg.sender, amount);
     }
 
-    bool sent = payable(msg.sender).send((amount * PRIZE_PER_COIN) / 0.2 ether);
+    bool sent = payable(msg.sender).send((amount * PRIZE_PER_COIN) / 1 ether);
     require(sent, 'Failed to send');
   }
 
-  function arbitrage(uint256 amount) external onlyOwner {
+  function redeem(uint256 amount) external {
     require(chosenNumber == 0, 'Number already chosen');
+
 
     ONE.burn(msg.sender, amount);
     TWO.burn(msg.sender, amount);
@@ -70,7 +76,9 @@ contract PredictBase is Ownable {
     FOUR.burn(msg.sender, amount);
     FIVE.burn(msg.sender, amount);
 
-    bool sent = payable(msg.sender).send((amount * PRIZE_PER_COIN) / 0.2 ether);
+    _burn(msg.sender, amount);
+
+    bool sent = payable(msg.sender).send((amount * PRIZE_PER_COIN) / 1 ether);
     require(sent, 'Failed to send');
   }
 }

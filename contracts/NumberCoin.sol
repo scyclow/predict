@@ -5,7 +5,7 @@ import "./Dependencies.sol";
 
 pragma solidity ^0.8.23;
 
-contract PredictCoin is ERC20 {
+contract NumberCoin is ERC20 {
   address public baseContract;
 
   constructor(string memory name_, string memory symbol_) ERC20(name_, symbol_) {

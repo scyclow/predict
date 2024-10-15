@@ -8,7 +8,6 @@ export const truncateAddr = (addr, len=13) => {
 }
 export const toETH = amt => ethers.utils.parseEther(String(amt))
 export const fromWei = amt => bnToN(amt)/1e18
-export const ethValue = amt => ({ value: toETH(amt) })
 export const txValue = amt => ({ value: toETH(amt) })
 export const ZERO_ADDR = '0x0000000000000000000000000000000000000000'
 
@@ -31,13 +30,31 @@ export class Web3Provider {
   onConnectCbs = []
   ens = ''
 
-  FORCED_CHAIN_ID = '0x7a69'
+  FORCED_CHAIN_ID = '0xaa36a7'
   VALID_CHAINS = [
     // '0x1', // mainnet
-    // '0xaa36a7', // sepolia
-    '0x7a69', // local
-    // '0x2105' // base
+    // '0x7a69', // local
+    '0xaa36a7', // sepolia
+    // '0x2105', // base
+    // '0x14a34', // base sepolia
   ]
+
+  CHAIN_NAMES = {
+    '0x1': 'mainnet',
+    '0xaa36a7': 'sepolia',
+    '0x7a69': 'local',
+    '0x2105': 'base',
+    '0x14a34': 'baseSepolia',
+  }
+
+  ETHERSCAN_URLS = {
+    mainnet: 'https://etherscan.io',
+    sepolia: 'https://sepolia.etherscan.io',
+    base: 'https://basescan.org',
+    baseSepolia: 'https://sepolia.basescan.org',
+  }
+
+
 
   hasConnected = false
 
@@ -65,7 +82,6 @@ export class Web3Provider {
 
             this.hasConnected = true
             const currentChain = await this.currentChain()
-            console.log(currentChain)
             if (addr && !this.VALID_CHAINS.includes(currentChain)) {
               await this.switchChain(this.FORCED_CHAIN_ID)
             }
@@ -214,15 +230,17 @@ export class Web3Provider {
       name = 'local'
     } else if (network.chainId === 11155111) {
       name = 'sepolia'
+    } else if (network.chainId === 8453) {
+      name = 'base'
+    } else if (network.chainId === 84532) {
+      name = 'baseSepolia'
     } else if (hasName) {
       name = network.name
     } else {
       name = network.chainId
     }
 
-    const etherscanPrefix = name === 'sepolia' ? 'sepolia.' : ''
-
-    return { name, chainId, hasName, network, etherscanPrefix }
+    return { name, chainId, hasName, network, etherscanLink: this.ETHERSCAN_URLS[name] || '' }
   }
 
   async contractEvents(contract, event, filterArgs) {

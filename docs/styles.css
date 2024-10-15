@@ -3,6 +3,7 @@
   --bg-color: #000;
   --font-color: #fff;
   --accent-color: #fff;
+  --tertiary-color: #fff;
 }
 
 * {
@@ -25,7 +26,7 @@ body {
 header, main, footer {
   max-width: 780px;
   margin: auto;
-  padding: 0 1.25rem;
+  padding: 0 1.2rem;
 }
 
 footer {
@@ -103,4 +104,10 @@ section {
 
 @media(max-width: 500px) {
 
+}
+
+
+::selection {
+  background: #fff;
+  color: var(--bg-color);
 }

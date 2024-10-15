@@ -11,36 +11,36 @@ async function main() {
     predicter2 = signers[3]
 
 
-    const PredictBaseFactory = await ethers.getContractFactory('PredictBase', picker)
-    const PredictCoinFactory = await ethers.getContractFactory('PredictCoin', picker)
+    const PredictTheNumberFactory = await ethers.getContractFactory('PredictTheNumber', picker)
+    const NumberCoinFactory = await ethers.getContractFactory('NumberCoin', picker)
 
-    PredictBase = await PredictBaseFactory.deploy()
-    await PredictBase.deployed()
+    PredictTheNumber = await PredictTheNumberFactory.deploy()
+    await PredictTheNumber.deployed()
 
 
-    ONE = await PredictCoinFactory.attach(
-      await PredictBase.ONE()
+    ONE = await NumberCoinFactory.attach(
+      await PredictTheNumber.ONE()
     )
-    TWO = await PredictCoinFactory.attach(
-      await PredictBase.TWO()
+    TWO = await NumberCoinFactory.attach(
+      await PredictTheNumber.TWO()
     )
-    THREE = await PredictCoinFactory.attach(
-      await PredictBase.THREE()
+    THREE = await NumberCoinFactory.attach(
+      await PredictTheNumber.THREE()
     )
-    FOUR = await PredictCoinFactory.attach(
-      await PredictBase.FOUR()
+    FOUR = await NumberCoinFactory.attach(
+      await PredictTheNumber.FOUR()
     )
-    FIVE = await PredictCoinFactory.attach(
-      await PredictBase.FIVE()
+    FIVE = await NumberCoinFactory.attach(
+      await PredictTheNumber.FIVE()
     )
 
-    await PredictBase.connect(marketMaker).marketMake(txValue('1'))
+    await PredictTheNumber.connect(marketMaker).create(txValue('1'))
 
 
     allCoins = [ONE, TWO, THREE, FOUR, FIVE]
 
 
-  console.log(`PredictBase:`, PredictBase.address)
+  console.log(`PredictTheNumber:`, PredictTheNumber.address)
   console.log(`ONE:`, ONE.address)
   console.log(`TWO:`, TWO.address)
   console.log(`THREE:`, THREE.address)

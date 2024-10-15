@@ -36,10 +36,10 @@ const contractBalance = contract => contract.provider.getBalance(contract.addres
 
 
 
-let PredictBase, ONE, TWO, THREE, FOUR, FIVE, allCoins
+let PredictTheNumber, ONE, TWO, THREE, FOUR, FIVE, allCoins
 let picker, marketMaker, predicter1, predicter2
 
-describe('PredictBase', () => {
+describe('PredictTheNumber', () => {
   beforeEach(async () => {
     const signers = await ethers.getSigners()
 
@@ -49,27 +49,27 @@ describe('PredictBase', () => {
     predicter2 = signers[3]
 
 
-    const PredictBaseFactory = await ethers.getContractFactory('PredictBase', picker)
-    const PredictCoinFactory = await ethers.getContractFactory('PredictCoin', picker)
+    const PredictTheNumberFactory = await ethers.getContractFactory('PredictTheNumber', picker)
+    const NumberCoinFactory = await ethers.getContractFactory('NumberCoin', picker)
 
-    PredictBase = await PredictBaseFactory.deploy()
-    await PredictBase.deployed()
+    PredictTheNumber = await PredictTheNumberFactory.deploy()
+    await PredictTheNumber.deployed()
 
 
-    ONE = await PredictCoinFactory.attach(
-      await PredictBase.ONE()
+    ONE = await NumberCoinFactory.attach(
+      await PredictTheNumber.ONE()
     )
-    TWO = await PredictCoinFactory.attach(
-      await PredictBase.TWO()
+    TWO = await NumberCoinFactory.attach(
+      await PredictTheNumber.TWO()
     )
-    THREE = await PredictCoinFactory.attach(
-      await PredictBase.THREE()
+    THREE = await NumberCoinFactory.attach(
+      await PredictTheNumber.THREE()
     )
-    FOUR = await PredictCoinFactory.attach(
-      await PredictBase.FOUR()
+    FOUR = await NumberCoinFactory.attach(
+      await PredictTheNumber.FOUR()
     )
-    FIVE = await PredictCoinFactory.attach(
-      await PredictBase.FIVE()
+    FIVE = await NumberCoinFactory.attach(
+      await PredictTheNumber.FIVE()
     )
 
     allCoins = [ONE, TWO, THREE, FOUR, FIVE]
@@ -98,52 +98,86 @@ describe('PredictBase', () => {
     it('Market making should mint the correct number of coins', async () => {
 
       const startingBalance = await getBalance(marketMaker)
-      await PredictBase.connect(marketMaker).marketMake(txValue('1'))
+      await PredictTheNumber.connect(marketMaker).create(txValue('1'))
 
       for (let coin of allCoins) {
-        expect(await coin.balanceOf(marketMaker.address)).to.equal(toETH(2000))
+        expect(await coin.balanceOf(marketMaker.address)).to.equal(toETH(10000))
       }
+      expect(await PredictTheNumber.balanceOf(marketMaker.address)).to.equal(toETH(10000))
 
       await ONE.connect(marketMaker).transfer(predicter2.address, toETH(1))
-      expect(await ONE.balanceOf(marketMaker.address)).to.equal(toETH(1999))
+      expect(await ONE.balanceOf(marketMaker.address)).to.equal(toETH(9999))
       const endingBalance = await getBalance(marketMaker)
 
       expect(startingBalance - endingBalance).to.be.closeTo(1, 0.001)
-      expect(await contractBalance(PredictBase)).to.equal(toETH(1))
+      expect(await contractBalance(PredictTheNumber)).to.equal(toETH(1))
     })
 
 
-    it('Arbitrage should return the eth', async () => {
+    it('Redeem should return the eth', async () => {
 
-      const startingBalance = await getBalance(picker)
-      await PredictBase.connect(marketMaker).marketMake(txValue('1'))
+      await PredictTheNumber.connect(marketMaker).create(txValue('1'))
 
       await expectRevert(
-        PredictBase.connect(marketMaker).arbitrage(toETH(2000)),
-        'Ownable: caller is not the owner'
+        PredictTheNumber.connect(predicter1).redeem(toETH(2000)),
+        'ERC20: burn amount exceeds balance'
       )
 
+
       for (let coin of allCoins) {
-        await coin.connect(marketMaker).transfer(picker.address, toETH(2000))
+        await coin.connect(marketMaker).transfer(predicter2.address, toETH(2000))
       }
+      const startingBalance = await getBalance(predicter2)
 
+      await expectRevert(
+        PredictTheNumber.connect(picker).redeem(toETH(1000)),
+        'ERC20: burn amount exceeds balance'
+      )
 
-      await PredictBase.connect(picker).arbitrage(toETH(1000))
+      await expectRevert(
+        PredictTheNumber.connect(predicter2).redeem(toETH(2000)),
+        'ERC20: burn amount exceeds balance'
+      )
+      await PredictTheNumber.connect(marketMaker).transfer(predicter2.address, toETH(1500))
+
+      await PredictTheNumber.connect(predicter2).redeem(toETH(1000))
 
       for (let coin of allCoins) {
         expect(
-          await coin.connect(marketMaker).balanceOf(picker.address)
+          await coin.connect(marketMaker).balanceOf(predicter2.address)
         ).to.equal(toETH(1000))
       }
 
-      const endingBalance = await getBalance(picker)
+      const endingBalance = await getBalance(predicter2)
 
-      expect(endingBalance - startingBalance).to.be.closeTo(0.5, 0.001)
-      expect(ethVal(await contractBalance(PredictBase))).to.equal(0.5)
+      expect(endingBalance - startingBalance).to.be.closeTo(0.1, 0.001)
+      expect(ethVal(await contractBalance(PredictTheNumber))).to.equal(0.9)
+      expect(ethVal(await PredictTheNumber.connect(predicter2).balanceOf(predicter2.address))).to.equal(500)
 
       await expectRevert(
-        PredictBase.connect(picker).arbitrage(toETH(2000)),
+        PredictTheNumber.connect(picker).redeem(toETH(2000)),
         'ERC20: burn amount exceeds balance'
+      )
+
+
+      await PredictTheNumber.connect(predicter2).redeem(toETH(500))
+
+      const mmStartBalance = await getBalance(marketMaker)
+      await PredictTheNumber.connect(marketMaker).redeem(toETH(8000))
+      const mmEndBalance = await getBalance(marketMaker)
+
+
+      const trueEndingBalance = await getBalance(predicter2)
+
+      expect(trueEndingBalance - startingBalance).to.be.closeTo(0.15, 0.001)
+      expect(mmEndBalance - mmStartBalance).to.be.closeTo(0.8, 0.001)
+      expect(ethVal(await contractBalance(PredictTheNumber))).to.equal(0.05)
+
+
+      await PredictTheNumber.connect(picker).pickNumber(1)
+      await expectRevert(
+        PredictTheNumber.connect(predicter2).redeem(toETH(1000)),
+        'Number already chosen'
       )
     })
 
@@ -151,78 +185,78 @@ describe('PredictBase', () => {
     for (let i = 1; i < 6; i++) {
       it(`picking ${i} should work`, async () => {
 
-        await PredictBase.connect(picker).marketMake(txValue('1'))
+        await PredictTheNumber.connect(picker).create(txValue('1'))
 
         await expectRevert(
-          PredictBase.connect(marketMaker).pickNumber(i),
+          PredictTheNumber.connect(marketMaker).pickNumber(i),
           'Ownable: caller is not the owner'
         )
 
-        await PredictBase.connect(picker).pickNumber(i)
+        await PredictTheNumber.connect(picker).pickNumber(i)
 
-        expect(await PredictBase.connect(picker).chosenNumber()).to.equal(i)
+        expect(await PredictTheNumber.connect(picker).chosenNumber()).to.equal(i)
 
         await expectRevert(
-          PredictBase.connect(picker).pickNumber(i),
+          PredictTheNumber.connect(picker).pickNumber(i),
           'Number already chosen'
         )
 
         await expectRevert(
-          PredictBase.connect(picker).arbitrage(toETH(2000)),
+          PredictTheNumber.connect(picker).redeem(toETH(2000)),
           'Number already chosen'
         )
 
         await expectRevert(
-          PredictBase.connect(picker).marketMake(txValue('1')),
+          PredictTheNumber.connect(picker).create(txValue('1')),
           'Number already chosen'
         )
       })
     }
 
     it(`picking invalid numbers shouldn't work`, async () => {
-      expect(await PredictBase.connect(picker).chosenNumber()).to.equal(0)
+      expect(await PredictTheNumber.connect(picker).chosenNumber()).to.equal(0)
 
       await expectRevert(
-        PredictBase.connect(picker).pickNumber(0),
+        PredictTheNumber.connect(picker).pickNumber(0),
         'Number out of range'
       )
 
       await expectRevert(
-        PredictBase.connect(picker).pickNumber(6),
+        PredictTheNumber.connect(picker).pickNumber(6),
         'Number out of range'
       )
     })
 
     for (let i = 1; i < 6; i++) {
-      it(`redeeming ${i} as a winner should work`, async () => {
+      it(`claiming ${i} as a winner should work`, async () => {
         const losingNumbers = times(5, j => j).filter(j => j !== i)
         const winnginCoinContract = allCoins[i - 1]
 
-        await PredictBase.connect(marketMaker).marketMake(txValue('1'))
+        await PredictTheNumber.connect(marketMaker).create(txValue('1'))
 
         await winnginCoinContract.connect(marketMaker).transfer(predicter1.address, toETH(2000))
 
-        await PredictBase.connect(picker).pickNumber(i)
+        await PredictTheNumber.connect(picker).pickNumber(i)
 
 
         const startingBalance = await getBalance(predicter1)
 
-        await PredictBase.connect(predicter1).redeem(i, toETH(1000))
+        await PredictTheNumber.connect(predicter1).claim(i, toETH(1000))
         expect(ethVal(await winnginCoinContract.connect(predicter1).balanceOf(predicter1.address))).to.equal(1000)
 
-        await PredictBase.connect(predicter1).redeem(i, toETH(1000))
+        await PredictTheNumber.connect(predicter1).claim(i, toETH(1000))
         expect(await winnginCoinContract.connect(predicter1).balanceOf(predicter1.address)).to.equal(0)
 
         const endingBalance = await getBalance(predicter1)
 
-        expect(endingBalance - startingBalance).to.be.closeTo(1, 0.001)
+        expect(endingBalance - startingBalance).to.be.closeTo(0.2, 0.001)
 
-        expect(ethVal(await contractBalance(PredictBase))).to.equal(0)
+        expect(ethVal(await contractBalance(PredictTheNumber))).to.equal(0.8)
 
         for (let loser of losingNumbers) {
           await expectRevert(
-            PredictBase.connect(predicter2).redeem(loser, 2000),
-            'Can only redeem coin for winning number'
+            PredictTheNumber.connect(predicter2).claim(loser, 2000),
+            'Can only claim prize for winning number'
           )
         }
       })
