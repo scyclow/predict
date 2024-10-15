@@ -750,96 +750,105 @@
         <li><em>ARBITRAGE OPPORTUNITY #2:</em> If the summation of all five <em>NUMBER_COIN</em> market prices is lower than 0.0001 ETH Market Makers can arbitrage the price by redeeming coins at a higher price than what they can be bought for.</li>
       </ul>
 
-      <div style="margin-top: 1em">
-        <h4 style="text-align: center;">My Balances:</h4>
-        <table style="margin: auto">
-          <tr>
-            <td style="padding-right: 1em">ETH</td>
-            <td id="ethBalance">-.---</td>
-          </tr>
-          <tr>
-            <td style="padding-right: 1em"><a class="oneContract">$ONE</a></td>
-            <td id="oneBalance">-.---</td>
-          </tr>
-          <tr>
-            <td style="padding-right: 1em"><a class="twoContract">$TWO</a></td>
-            <td id="twoBalance">-.---</td>
-          </tr>
-          <tr>
-            <td style="padding-right: 1em"><a class="threeContract">$THREE</a></td>
-            <td id="threeBalance">-.---</td>
-          </tr>
-          <tr>
-            <td style="padding-right: 1em"><a class="fourContract">$FOUR</a></td>
-            <td id="fourBalance">-.---</td>
-          </tr>
-          <tr>
-            <td style="padding-right: 1em"><a class="fiveContract">$FIVE</a></td>
-            <td id="fiveBalance">-.---</td>
-          </tr>
-          <tr>
-            <td style="padding-right: 1em"><a class="predictContract">$PREDICT</a></td>
-            <td id="predictBalance">-.---</td>
-          </tr>
-        </table>
+      <connect-wallet>
 
-        <table style="margin: auto; margin-top: 0.5em">
+        <div slot="connected">
+          <div style="margin-top: 1em">
+            <h4 style="text-align: center;">My Balances:</h4>
+            <table style="margin: auto">
+              <tr>
+                <td style="padding-right: 1em">ETH</td>
+                <td id="ethBalance">-.---</td>
+              </tr>
+              <tr>
+                <td style="padding-right: 1em"><a class="oneContract">$ONE</a></td>
+                <td id="oneBalance">-.---</td>
+              </tr>
+              <tr>
+                <td style="padding-right: 1em"><a class="twoContract">$TWO</a></td>
+                <td id="twoBalance">-.---</td>
+              </tr>
+              <tr>
+                <td style="padding-right: 1em"><a class="threeContract">$THREE</a></td>
+                <td id="threeBalance">-.---</td>
+              </tr>
+              <tr>
+                <td style="padding-right: 1em"><a class="fourContract">$FOUR</a></td>
+                <td id="fourBalance">-.---</td>
+              </tr>
+              <tr>
+                <td style="padding-right: 1em"><a class="fiveContract">$FIVE</a></td>
+                <td id="fiveBalance">-.---</td>
+              </tr>
+              <tr>
+                <td style="padding-right: 1em"><a class="predictContract">$PREDICT</a></td>
+                <td id="predictBalance">-.---</td>
+              </tr>
+            </table>
 
-          <tr class="inputRow">
-            <td colspan="2"><h5 style="transform: translateY(.5em);">Create NUMBER_COINs:</h5></td>
-            <td></td>
-          </tr>
-          <tr class="inputRow">
-            <td>
-              <input id="createInput" type="number" placeholder="Quantity">
-            </td>
-            <td>
-              <button id="createSubmit" class="buyButton">Create</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="tertiary" id="createMesage" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
-            <td></td>
-          </tr>
+            <table style="margin: auto; margin-top: 0.5em">
 
-          <tr class="inputRow">
-            <td colspan="2"><h5 style="transform: translateY(.5em);">Redeem NUMBER_COINs:</h5></td>
-            <td></td>
-          </tr>
-          <tr class="inputRow">
-            <td>
-              <input id="redeemInput" type="number" placeholder="Quantity">
-            </td>
-            <td>
-              <button id="redeemSubmit" class="buyButton">Redeem</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="tertiary" id="redeemMesage" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
-            <td></td>
-          </tr>
+              <tr class="inputRow">
+                <td colspan="2"><h5 style="transform: translateY(.5em);">Create NUMBER_COINs:</h5></td>
+                <td></td>
+              </tr>
+              <tr class="inputRow">
+                <td>
+                  <input id="createInput" type="number" placeholder="Quantity">
+                </td>
+                <td>
+                  <button id="createSubmit" class="buyButton">Create</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="tertiary" id="createMesage" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
+                <td></td>
+              </tr>
 
-
-          <tr class="inputRow">
-            <td><h5 style="transform: translateY(.5em);">Buy <a class="predictContract">$PREDICT</a><span id="predictPrice"></span>:</h5></td>
-            <td></td>
-          </tr>
-          <tr class="inputRow">
-            <td>
-              <input id="buyPredictInput" type="number" placeholder="Quantity">
-            </td>
-            <td>
-              <button id="buyPredictSubmit" class="buyButton">Buy</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="tertiary" id="createMesage" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
-            <td></td>
-          </tr>
-        </table>
+              <tr class="inputRow">
+                <td colspan="2"><h5 style="transform: translateY(.5em);">Redeem NUMBER_COINs:</h5></td>
+                <td></td>
+              </tr>
+              <tr class="inputRow">
+                <td>
+                  <input id="redeemInput" type="number" placeholder="Quantity">
+                </td>
+                <td>
+                  <button id="redeemSubmit" class="buyButton">Redeem</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="tertiary" id="redeemMesage" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
+                <td></td>
+              </tr>
 
 
-      </div>
+              <tr class="inputRow">
+                <td><h5 style="transform: translateY(.5em);">Buy <a class="predictContract">$PREDICT</a><span id="predictPrice"></span>:</h5></td>
+                <td></td>
+              </tr>
+              <tr class="inputRow">
+                <td>
+                  <input id="buyPredictInput" type="number" placeholder="Quantity">
+                </td>
+                <td>
+                  <button id="buyPredictSubmit" class="buyButton">Buy</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="tertiary" id="createMesage" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div slot="notConnected">
+          <connect-button>
+            <button id="connectButton" slot="button" style="margin: 1em 0; font-size: 1.25em;">Connect Wallet</button>
+          </connect-button>
+        </div>
+      </connect-wallet>
 
     </section>
 
