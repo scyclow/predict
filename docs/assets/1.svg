@@ -1,31 +1,4 @@
-
-
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title></title>
-
-  <style type="text/css">
-    body {
-      background: #888;
-    }
-  </style>
-</head>
-<body>
-
-
-
 <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
   <rect x="0" y="0" width="500" height="500" fill="#040012"></rect>
   <text x="250" y="425" text-anchor="middle" fill="#fa32e7" font-size="500" font-family="monospace">1</text>
 </svg>
-
-
-
-
-
-
-
-</body>
-</html>
