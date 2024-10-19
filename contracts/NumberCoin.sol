@@ -3,7 +3,7 @@
 import "./Dependencies.sol";
 
 
-pragma solidity ^0.8.23;
+pragma solidity ^0.8.28;
 
 contract NumberCoin is ERC20 {
   address public baseContract;

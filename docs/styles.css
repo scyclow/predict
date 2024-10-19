@@ -23,10 +23,13 @@ body {
   animation: FadeIn 0.75s linear;
 }
 
-header, main, footer {
+main {
+  padding: 0 1.2rem;
+}
+
+header, main, footer, section {
   max-width: 780px;
   margin: auto;
-  padding: 0 1.2rem;
 }
 
 footer {
@@ -60,9 +63,6 @@ button:disabled {
 }
 
 
-section {
-  margin-bottom: 2em;
-}
 
 
 .label {
@@ -74,6 +74,10 @@ section {
 .address {
   font-family: monospace;
   font-weight: bold;
+}
+
+.hidden {
+  display: none !important;
 }
 
 

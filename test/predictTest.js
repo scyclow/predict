@@ -174,10 +174,10 @@ describe('PredictTheNumber', () => {
       expect(ethVal(await contractBalance(PredictTheNumber))).to.equal(0.05)
 
 
-      await PredictTheNumber.connect(picker).pickNumber(1)
+      await PredictTheNumber.connect(picker).pickTheNumber(1)
       await expectRevert(
         PredictTheNumber.connect(predicter2).redeem(toETH(1000)),
-        'Number already chosen'
+        'Number already picked'
       )
     })
 
@@ -188,43 +188,54 @@ describe('PredictTheNumber', () => {
         await PredictTheNumber.connect(picker).create(txValue('1'))
 
         await expectRevert(
-          PredictTheNumber.connect(marketMaker).pickNumber(i),
+          PredictTheNumber.connect(marketMaker).pickTheNumber(i),
           'Ownable: caller is not the owner'
         )
 
-        await PredictTheNumber.connect(picker).pickNumber(i)
+        await PredictTheNumber.connect(picker).pickTheNumber(i)
 
-        expect(await PredictTheNumber.connect(picker).chosenNumber()).to.equal(i)
+        expect(await PredictTheNumber.connect(picker).TheNumber()).to.equal(i)
 
         await expectRevert(
-          PredictTheNumber.connect(picker).pickNumber(i),
-          'Number already chosen'
+          PredictTheNumber.connect(picker).pickTheNumber(i),
+          'Number already picked'
         )
 
         await expectRevert(
           PredictTheNumber.connect(picker).redeem(toETH(2000)),
-          'Number already chosen'
+          'Number already picked'
         )
 
         await expectRevert(
           PredictTheNumber.connect(picker).create(txValue('1')),
-          'Number already chosen'
+          'Number already picked'
         )
       })
     }
 
     it(`picking invalid numbers shouldn't work`, async () => {
-      expect(await PredictTheNumber.connect(picker).chosenNumber()).to.equal(0)
+      expect(await PredictTheNumber.connect(picker).TheNumber()).to.equal(0)
 
       await expectRevert(
-        PredictTheNumber.connect(picker).pickNumber(0),
+        PredictTheNumber.connect(picker).pickTheNumber(0),
         'Number out of range'
       )
 
       await expectRevert(
-        PredictTheNumber.connect(picker).pickNumber(6),
+        PredictTheNumber.connect(picker).pickTheNumber(6),
         'Number out of range'
       )
+
+      await expectRevert(
+        PredictTheNumber.connect(picker).pickTheNumber(127),
+        'Number out of range'
+      )
+
+      await expectRevert(
+        PredictTheNumber.connect(picker).pickTheNumber(-2),
+        'Number out of range'
+      )
+
     })
 
     for (let i = 1; i < 6; i++) {
@@ -236,7 +247,7 @@ describe('PredictTheNumber', () => {
 
         await winnginCoinContract.connect(marketMaker).transfer(predicter1.address, toETH(2000))
 
-        await PredictTheNumber.connect(picker).pickNumber(i)
+        await PredictTheNumber.connect(picker).pickTheNumber(i)
 
 
         const startingBalance = await getBalance(predicter1)
@@ -261,6 +272,54 @@ describe('PredictTheNumber', () => {
         }
       })
     }
+  })
+
+  describe('flash loans', () => {
+    it('should work', async () => {
+      const FlashLoanTestFactory = await ethers.getContractFactory('FlashLoanTest', picker)
+      const FlashLoanTest = await FlashLoanTestFactory.deploy()
+      await FlashLoanTest.deployed()
+
+
+
+      await PredictTheNumber.connect(marketMaker).create(txValue('1'))
+
+      const startingContractBalance = await contractBalance(PredictTheNumber)
+
+      await expectRevert(
+        PredictTheNumber.connect(predicter2).flashLoan(1, predicter2.address),
+        'Flash loans not enabled'
+      )
+      expect(await PredictTheNumber.connect(predicter2).flashLoansEnabled()).to.equal(false)
+
+      await expectRevert(
+        PredictTheNumber.connect(marketMaker).enableFlashLoans(true),
+        'Ownable: caller is not the owner'
+      )
+
+      await PredictTheNumber.connect(picker).enableFlashLoans(true)
+
+      await expectRevert(
+        PredictTheNumber.connect(predicter2).flashLoan(1, predicter2.address),
+        'Must repay loan'
+      )
+
+
+      await PredictTheNumber.connect(predicter2).flashLoan(toETH(1), FlashLoanTest.address)
+      await PredictTheNumber.connect(predicter2).flashLoan(toETH(1), FlashLoanTest.address)
+      await PredictTheNumber.connect(predicter2).flashLoan(toETH(1), FlashLoanTest.address)
+
+      await expectRevert.unspecified(
+        PredictTheNumber.connect(predicter2).flashLoan(toETH(1.1), FlashLoanTest.address),
+        ''
+      )
+
+
+      const endingContractBalance = await contractBalance(PredictTheNumber)
+
+      expect(ethVal(await FlashLoanTest.balanceBorrowed())).to.equal(3)
+      expect(startingContractBalance).to.equal(endingContractBalance)
+    })
   })
 })
 

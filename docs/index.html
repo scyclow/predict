@@ -33,6 +33,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
     :root {
+      --light-color: #fff;
       --bg-color: #040012;
       --font-color: #00ffca;
       --accent-color: #fa32e7;
@@ -91,10 +92,12 @@
 
     a {
       color: var(--font-color);
+      transition: 200ms;
     }
 
     a:hover {
       text-decoration: none;
+      --font-color: var(--light-color);
     }
 
     li {
@@ -108,7 +111,8 @@
     }
 
     section {
-      margin: 6em 0;
+      margin-top: 6em;
+      margin-bottom: 6em;
     }
 
     article {
@@ -139,6 +143,9 @@
       opacity: 1;
     }
 
+    .probability {
+      font-style: italic;
+    }
     .inputRow td {
       padding-top: 0.5em
     }
@@ -159,6 +166,11 @@
     }
 
     .buyButton:hover {
+      background: var(--light-color);
+      color: var(--bg-color);
+      border-color: var(--bg-color);
+    }
+    .buyButton:active {
       background: var(--bg-color);
       color: var(--font-color);
       border-color: var(--font-color);
@@ -188,17 +200,27 @@
     }
 
     #connectButton:hover {
-      background: var(--bg-color);
-      color: var(--font-color);
+      background: var(--light-color);
+      color: var(--bg-color);
+      border-color: var(--bg-color);
     }
 
+    #connectButton:active {
+      background: var(--bg-color);
+      color: var(--font-color);
+      border-color: var(--font-color);
+    }
 
-    .buyTable {
+    .borderContainer {
       border: 1em double;
       padding: 0.75em 1em;
+      display: inline-block;
+    }
+
+    .buyTable {
       font-size: 1.3em;
-      margin: 0em auto;
-      border-spacing:  0;
+      border-spacing: 0;
+      margin: auto;
     }
 
     .buyTable tbody tr {
@@ -229,6 +251,26 @@
     .question {
       margin-top: 2em;
       margin-bottom: 0.5em;
+    }
+
+    .percent {
+      font-size: 5em;
+      padding: 0 1em;
+    }
+
+    #lpContainer {
+      margin-top: 2.5em;
+      margin-bottom: 1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #lpContainer .buyLink + div {
+      margin-top: 0.5em;
+    }
+    #lpContainer > div {
+      margin: 1em 0;
     }
 
 
@@ -284,6 +326,34 @@
       padding: 0.15em;
     }
 
+    .advancedTable {
+      border-spacing: 0;
+    }
+
+    .advancedTable th {
+      border-bottom: 1px dotted;
+    }
+    .advancedTable th:first-child {
+      border-bottom: 0;
+    }
+
+    .advancedTable td, .advancedTable th {
+      text-align: center;
+      padding: 0.25em;
+      padding-left: 0.5em;
+
+    }
+    .advancedTable th:nth-child(2), .advancedTable td:nth-child(2) {
+      text-align: left;
+    }
+
+    .lastUpdated {
+      margin-top: 0.25em;
+      text-align: right;
+      font-style: italic;
+    }
+
+
     @keyframes GrowShrinkMid {
       0%, 100% {
         transform: scale(1.15) ;
@@ -304,6 +374,19 @@
       }
     }
 
+    .spin {
+      animation: Spin 3s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes Spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
     .upDown {
       animation: UpDown 1.5s cubic-bezier(0.58, 0.06, 0.44, 0.98) infinite;
       display: inline-block;
@@ -375,22 +458,37 @@
         font-size: 3em;
       }
 
-      article h4, article p {
+      h4, p {
         font-size: 0.8em;
       }
 
-      article .buyLink {
+      .buyLink {
         font-size: 1em;
       }
 
       article > div {
         padding-left: 1em;
       }
+
+      .percent {
+        font-size: 3em;
+        padding: 0 0.5em;
+      }
+
+      .advancedTable {
+        font-size: 0.9em;
+      }
+
+
     }
 
     @media (max-width:  580px) {
       h1, h2 {
         font-size: 2.5em;
+      }
+
+      .buyLink {
+        font-size: 0.85em;
       }
 
 
@@ -406,6 +504,14 @@
         font-size: 1em;
       }
 
+      .largeList li {
+        line-height: 1.7em;
+        margin-bottom: 0.5em;
+      }
+      .largeList em {
+        padding: .15em;
+      }
+
       .mmSection ul {
         font-size: 0.8em;
       }
@@ -418,11 +524,46 @@
         line-height: 2;
       }
 
+      #lpContainer .buyLink + div {
+        font-size: 0.9em;
+      }
+
+
 
       .inputRow input {
         margin-right: 0.15em;
         margin-left: -0.15em;
       }
+
+      .advancedTable {
+        font-size: 0.8em;
+      }
+
+    }
+    @media (max-width:  540px) {
+      .advancedTable {
+        font-size: 0.7em;
+      }
+
+      .borderContainer {
+        border: 0.5em double;
+        padding: 0.5em;
+      }
+
+
+      .lastUpdated {
+        text-align: center;
+      }
+
+
+      .advancedTable th:nth-child(5), .advancedTable td:nth-child(5) {
+        display: none;
+      }
+
+    }
+
+    @media (max-width:  390px) {
+
 
     }
 
@@ -467,9 +608,11 @@
 
 
   </header> -->
-  <h1 class="growShrinkSmall">Predict <span style="display: inline-block;">The Number</span></h1>
+  <div style="width: 100vw; overflow: hidden;">
+    <h1 class="growShrinkSmall">Predict <span style="display: inline-block;">The Number</span></h1>
+  </div>
 
-  <main>
+  <main style="max-width: 100vw; overflow: hidden">
     <div style="font-size: 4em; display: flex; justify-content: center;">
       <!-- <span class="upDown" style="animation-delay: -1.5s">↓</span> -->
       <!-- <span class="upDown" style="animation-delay: -1.25s">↓</span> -->
@@ -489,90 +632,6 @@
     </div>
 
     <section>
-      <connect-wallet>
-
-        <div slot="connected">
-          <div style="margin-top: 4em">
-            <h4 class="blink" style="margin-bottom: 0.5em; text-align: center; animation-delay: -0.20s">LIVE PRICES!</h4>
-            <table class="buyTable">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>COIN:</th>
-                  <th>PRICE<sup>*</sup>:</th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr id="oneRow">
-                  <td><span class="accent">1</span></td>
-                  <td>$ONE</td>
-                  <td><span id="onePrice">-.----</span> ETH</td>
-                  <td><span class="blinkShort" style="animation-delay: -0.80s">☜</span></td>
-                </tr>
-
-                <tr id="twoRow">
-                  <td><span class="accent">2</span></td>
-                  <td>$TWO</td>
-                  <td><span id="twoPrice">-.----</span> ETH</td>
-                  <td><span class="blinkShort" style="animation-delay: -.6s">☜</span></td>
-                </tr>
-
-                <tr id="threeRow">
-                  <td><span class="accent">3</span></td>
-                  <td>$THREE</td>
-                  <td><span id="threePrice">-.----</span> ETH</td>
-                  <td><span class="blinkShort" style="animation-delay: -0.4s">☜</span></td>
-                </tr>
-
-                <tr id="fourRow">
-                  <td><span class="accent">4</span></td>
-                  <td>$FOUR</td>
-                  <td><span id="fourPrice">-.----</span> ETH</td>
-                  <td><span class="blinkShort" style="animation-delay: -.2s">☜</span></td>
-                </tr>
-
-                <tr id="fiveRow">
-                  <td><span class="accent">5</span></td>
-                  <td>$FIVE</td>
-                  <td><span id="fivePrice">-.----</span> ETH</td>
-                  <td><span class="blinkShort" style="animation-delay: 0s">☜</span></td>
-                </tr>
-
-                <tr >
-                  <td style="border-top: 3px solid;"></td>
-                  <td style="border-top: 3px solid;">PRIZE:</td>
-                  <td style="border-top: 3px solid; text-align: right;">1 ETH<sup style="display: inline-block;width:0">*</sup></td>
-                  <td style="border-top: 3px solid;"></td>
-                </tr>
-              </tbody>
-            </table>
-            <h4 style="margin-top:0.25em; text-align: center">* Per 10,000 Coins Owned</h4>
-          </div>
-        </div>
-
-      </connect-wallet>
-    </section>
-
-    <section>
-      <connect-wallet>
-        <div slot="connected">
-          <div style="display: flex; justify-content: center;">
-            <h2 class="dance">Which one <span style="display: inline-block;">will it be?!</span></h2>
-          </div>
-          <h2 style="margin-top: 1em;">
-            <span class="blinkShort accent" style="animation-delay: -0.8s">1</span>
-            <span class="blinkShort accent" style="animation-delay: -0.6s">2</span>
-            <span class="blinkShort accent" style="animation-delay: -0.4s">3</span>
-            <span class="blinkShort accent" style="animation-delay: -0.2s">4</span>
-            <span class="blinkShort accent" style="animation-delay: 0s">5</span>
-          </h2>
-        </div>
-      </connect-wallet>
-    </section>
-
-    <section>
       <h2 class="">How does it work?</h2>
 
       <ul class="largeList" style="margin: auto;">
@@ -586,151 +645,419 @@
         <!-- <li>The NumperPicker will pick a number. 1, 2, 3, 4, or 5.</li> -->
         <!-- <li><em>MARKET_MAKERS</em> provide <em>LIQUIDITY</em></li> -->
       </ul>
+      <h4 style="text-align: center; margin-top: 1em"><a href="#faq">Have a question?</a></h4>
 
     </section>
 
+    <section style="display: flex; flex-direction: column; align-items: center;">
+      <h4 class="blink" style="margin-bottom: 0.5em; animation-delay: -0.20s">LIVE PRICES!</h4>
+      <div>
+        <connect-wallet>
+          <div slot="connected">
+            <div id="simplifiedView" class="borderContainer">
+              <table class="buyTable">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>COIN:</th>
+                    <th style="padding-left: 0.5em">PRICE<sup>*</sup>:</th>
+                    <th></th>
+                  </tr>
+                </thead>
 
+                <tbody>
+                  <tr onclick="location.hash='buyOne'">
+                    <td><span class="accent">1</span></td>
+                    <td>$ONE</td>
+                    <td style="text-align: right"><span class="onePrice">-.--</span></td>
+                    <td><span class="blinkShort" style="animation-delay: -0.80s">☜</span></td>
+                  </tr>
 
-    <section>
-      <connect-wallet>
-        <div slot="noWeb3">
-          <h3>Please visit this page in a web3-enabled browser to predict the number</h3>
-        </div>
+                  <tr onclick="location.hash='buyTwo'">
+                    <td><span class="accent">2</span></td>
+                    <td>$TWO</td>
+                    <td style="text-align: right"><span class="twoPrice">-.--</span></td>
+                    <td><span class="blinkShort" style="animation-delay: -.6s">☜</span></td>
+                  </tr>
 
-        <div slot="notConnected">
-          <div>
-            <div style="display: flex; justify-content: center;">
-              <h2 class="dance">Which one <span style="display: inline-block;">will it be?!</span></h2>
+                  <tr onclick="location.hash='buyThree'">
+                    <td><span class="accent">3</span></td>
+                    <td>$THREE</td>
+                    <td style="text-align: right"><span class="threePrice">-.--</span></td>
+                    <td><span class="blinkShort" style="animation-delay: -0.4s">☜</span></td>
+                  </tr>
+
+                  <tr onclick="location.hash='buyFour'">
+                    <td><span class="accent">4</span></td>
+                    <td>$FOUR</td>
+                    <td style="text-align: right"><span class="fourPrice">-.--</span></td>
+                    <td><span class="blinkShort" style="animation-delay: -.2s">☜</span></td>
+                  </tr>
+
+                  <tr onclick="location.hash='buyFive'">
+                    <td><span class="accent">5</span></td>
+                    <td>$FIVE</td>
+                    <td style="text-align: right"><span class="fivePrice">-.--</span></td>
+                    <td><span class="blinkShort" style="animation-delay: 0s">☜</span></td>
+                  </tr>
+
+                  <tr >
+                    <td style="border-top: 3px solid;"></td>
+                    <td style="border-top: 3px solid;">PRIZE:</td>
+                    <td style="border-top: 3px solid; text-align: right;">1.00</td>
+                    <td style="border-top: 3px solid;"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4 style="margin-top:0.25em; text-align: center">* ETH Per 10,000 Coins</h4>
             </div>
-            <h2 style="margin-top: 1em;">
-              <span class="blinkShort accent" style="animation-delay: -0.8s">1</span>
-              <span class="blinkShort accent" style="animation-delay: -0.6s">2</span>
-              <span class="blinkShort accent" style="animation-delay: -0.4s">3</span>
-              <span class="blinkShort accent" style="animation-delay: -0.2s">4</span>
-              <span class="blinkShort accent" style="animation-delay: 0s">5</span>
-            </h2>
+
+            <div id="advancedView" class="borderContainer hidden">
+              <table class="advancedTable">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>COIN</th>
+                    <th>PRICE<sup>*</sup></th>
+                    <th>BALANCE</th>
+                    <th>LIQUIDITY</th>
+                    <th><span>☟ ☟</span></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td><span class="accent">1</span></td>
+                    <td><a class="oneContract">$ONE</a></td>
+                    <td><span class="onePrice3">-.--</span></td>
+                    <td class="oneBalance">-</td>
+                    <td class="onePoolSize">-</td>
+                    <td style="padding-left: 1em">
+                      <a class="tradeOne">Trade</a>
+                      <a class="lpOne">LP</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><span class="accent">2</span></td>
+                    <td><a class="twoContract">$TWO</a></td>
+                    <td><span class="twoPrice3">-.--</span></td>
+                    <td class="twoBalance">-</td>
+                    <td class="twoPoolSize">-</td>
+                    <td style="padding-left: 1em">
+                      <a class="tradeTwo">Trade</a>
+                      <a class="lpTwo">LP</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><span class="accent">3</span></td>
+                    <td><a class="threeContract">$THREE</a></td>
+                    <td><span class="threePrice3">-.--</span></td>
+                    <td class="threeBalance">-</td>
+                    <td class="threePoolSize">-</td>
+                    <td style="padding-left: 1em">
+                      <a class="tradeThree">Trade</a>
+                      <a class="lpThree">LP</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><span class="accent">4</span></td>
+                    <td><a class="fourContract">$FOUR</a></td>
+                    <td><span class="fourPrice3">-.--</span></td>
+                    <td class="fourBalance">-</td>
+                    <td class="fourPoolSize">-</td>
+                    <td style="padding-left: 1em">
+                      <a class="tradeFour">Trade</a>
+                      <a class="lpFour">LP</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><span class="accent">5</span></td>
+                    <td><a class="fiveContract">$FIVE</a></td>
+                    <td><span class="fivePrice3">-.--</span></td>
+                    <td class="fiveBalance">-</td>
+                    <td class="fivePoolSize">-</td>
+                    <td style="padding-left: 1em">
+                      <a class="tradeFive">Trade</a>
+                      <a class="lpFive">LP</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="border-top: 1px solid"><span id="priceSum">-</span></td>
+                    <td style="border-top: 1px solid"><span id="balanceSum"></td>
+                    <td style="border-top: 1px solid"><span id="lqSum"></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h6 style="margin-top:0.25em; text-align: center; font-style: italic;">(* ETH Per 10,000 Coins)</h6>
+
+              <!-- <h5 style="text-align: center; margin: 1em 0">→ <a href="#mmSection">Add Liquidity</a> ←</h5> -->
+              <h6 class="lastUpdated">Last Updated: <span id="lastUpdated"></span>s ago</h6>
+
+              <div style="margin:1em 0">
+
+                <table class="advancedTable" style="margin-top: 3em">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>COIN</th>
+                      <th>PRICE<sup>*</sup></th>
+                      <th>BALANCE</th>
+                      <th>LIQUIDITY</th>
+                      <th><span>☟ ☟</span></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td><a class="predictContract">$PREDICT</a></td>
+                      <td ><span class="predictPrice3">-.--</span></td>
+                      <td class="predictBalance">-</td>
+                      <td class="predictPoolSize">-</td>
+                      <td style="padding-left: 1em">
+                        <a class="tradePredict">Trade</a>
+                        <a class="lpPredict">LP</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+                <table style="margin: auto; margin-top: 0.5em">
+
+                  <tr class="inputRow">
+                    <td colspan="2"><h5 style="transform: translateY(.5em);">Create NUMBER_COINs:</h5></td>
+                    <td></td>
+                  </tr>
+                  <tr class="inputRow">
+                    <td>
+                      <input id="createInput2" type="number" placeholder="Quantity">
+                    </td>
+                    <td>
+                      <button id="createSubmit2" class="buyButton">Create</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tertiary" id="createMesage2" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
+                    <td></td>
+                  </tr>
+
+                  <tr class="inputRow">
+                    <td colspan="2"><h5 style="transform: translateY(.5em);">Redeem NUMBER_COINs:</h5></td>
+                    <td></td>
+                  </tr>
+                  <tr class="inputRow">
+                    <td>
+                      <input id="redeemInput2" type="number" placeholder="Quantity">
+                    </td>
+                    <td>
+                      <button id="redeemSubmit2" class="buyButton">Redeem</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tertiary" id="redeemMesage2" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <h5 style="margin-top: 0.25em; text-align: center;"><span class="blink">☞</span> <span id="toggleView" style="cursor:  pointer; text-decoration: underline;">Advanced View</span></h5>
           </div>
 
-          <connect-button>
-            <button id="connectButton" slot="button" style="margin-top: 1em;">Connect Wallet</button>
-          </connect-button>
-        </div>
+          <div slot="notConnected">
+            <div class="borderContainer">
+              <connect-button>
+                <button id="connectButton" slot="button" style="margin-top: 1em;">Connect Wallet</button>
+              </connect-button>
+            </div>
 
-      </connect-wallet>
+            <h5 style="margin-top: 1em; text-align: center;">CONNECT TO VIEW LIVE DATA</h5>
+          </div>
+
+          <div slot="noWeb3">
+            <div class="borderContainer">
+              <h3>Please visit this page in a web3-enabled browser to view live data</h3>
+            </div>
+          </div>
+        </connect-wallet>
+      </div>
     </section>
 
     <section>
-      <article id="buyOne">
+
+
+      <div style="display: flex; justify-content: center;">
+        <h2 class="dance">Which one <span style="display: inline-block;">will it be?!</span></h2>
+      </div>
+      <h2 style="margin-top: 1em;">
+        <span class="blinkShort accent" style="animation-delay: -0.8s">1</span>
+        <span class="blinkShort accent" style="animation-delay: -0.6s">2</span>
+        <span class="blinkShort accent" style="animation-delay: -0.4s">3</span>
+        <span class="blinkShort accent" style="animation-delay: -0.2s">4</span>
+        <span class="blinkShort accent" style="animation-delay: 0s">5</span>
+      </h2>
+
+    </section>
+
+
+
+    <section>
+      <article id="buyOne" style="paddingf-top: 0.5em">
         <h3>Will it be <span class="accent">1</span><span class="growShrink" style="padding-left:0.15em">?</span></h3>
         <div>
+          <div style="margin: 1.5em 0">
+            <a class="tradeOne buyLink">Trade $ONE on Uniswap →</a>
+          </div>
+
           <connect-wallet>
             <div slot="connected">
-              <h4><a class="oneContract">$ONE</a> Price: <span id="onePrice2">-.----</span> ETH</h4>
-              <h4>Implied selection probability: <span id="oneProb">-</span>%</h4>
+              <h4><a class="oneContract">$ONE</a> Price: <span claclass="onePrie22">-</span> ETH</h4>
+              <h4>Implied probability: <span class="oneProb" class="probability">-%</span></h4>
+              <h4>Liquidity: <span class="onePoolSize">-</span> $ONE</h4>
+              <h4 id="oneBalance2Container">My Balance: <span class="oneBalance"></span> $ONE</h4>
             </div>
           </connect-wallet>
 
           <p style="font-style: italic;">(If <span class="accent">1</span> is selected, you can redeem each <a class="oneContract">$ONE</a> coin for 0.0001 ETH)</p>
-          <div style="margin: 1em 0">
-            <a href="" target="_blank" rel="nofollow" class="buyLink">Buy $ONE on Uniswap →</a>
-          </div>
         </div>
       </article>
 
-      <article id="buyTwo">
+      <article id="buyTwo" style="paddingf-top: 0.5em">
         <h3>Will it be <span class="accent">2</span><span class="growShrink" style="padding-left:0.15em">?</span></h3>
         <div>
+          <div style="margin: 1.5em 0">
+            <a class="tradeTwo buyLink">Trade $TWO on Uniswap →</a>
+          </div>
+
           <connect-wallet>
             <div slot="connected">
-              <h4><a class="twoContract">$TWO</a> Price: <span id="twoPrice2">-.----</span> ETH</h4>
-              <h4>Implied selection probability: <span id="oneProb">-</span>%</h4>
+              <h4><a class="twoContract">$TWO</a> Price: <span class="twoPrice2">-</span> ETH</h4>
+              <h4>Implied probability: <span class="twoProb" class="probability">-%</span></h4>
+              <h4>Liquidity: <span class="twoPoolSize">-</span> $TWO</h4>
+              <h4 id="twoBalance2Container">My Balance: <span class="twoBalance"></span> $TWO</h4>
             </div>
           </connect-wallet>
 
           <p style="font-style: italic;">(If <span class="accent">2</span> is selected, you can redeem each <a class="twoContract">$TWO</a> coin for 0.0001 ETH)</p>
-          <div style="margin: 1em 0">
-            <a href="" target="_blank" rel="nofollow" class="buyLink">Buy $TWO on Uniswap →</a>
-          </div>
         </div>
       </article>
 
-      <article id="buyThree">
+      <article id="buyThree" style="paddingf-top: 0.5em">
         <h3>Will it be <span class="accent">3</span><span class="growShrink" style="padding-left:0.15em">?</span></h3>
         <div>
+          <div style="margin: 1.5em 0">
+            <a class="tradeThree buyLink">Trade $THREE on Uniswap →</a>
+          </div>
+
           <connect-wallet>
             <div slot="connected">
-              <h4><a class="threeContract">$THREE</a> Price: <span id="threePrice2">-.----</span> ETH</h4>
-              <h4>Implied selection probability: <span id="oneProb">-</span>%</h4>
+              <h4><a class="threeContract">$THREE</a> Price: <span class="threePric22">-</span> ETH</h4>
+              <h4>Implied probability: <span class="threeProb" class="probability">-%</span></h4>
+              <h4>Liquidity: <span class="threePoolSize">-</span> $THREE</h4>
+              <h4 id="threeBalance2Container">My Balance: <span class="threeBalance"></span> $THREE</h4>
             </div>
           </connect-wallet>
 
           <p style="font-style: italic;">(If <span class="accent">3</span> is selected, you can redeem each <a class="threeContract">$THREE</a> coin for 0.0001 ETH)</p>
-          <div style="margin: 1em 0">
-            <a href="" target="_blank" rel="nofollow" class="buyLink">Buy $THREE on Uniswap →</a>
-          </div>
         </div>
       </article>
 
-      <article id="buyFour">
+      <article id="buyFour" style="paddingf-top: 0.5em">
         <h3>Will it be <span class="accent">4</span><span class="growShrink" style="padding-left:0.15em">?</span></h3>
         <div>
+          <div style="margin: 1.5em 0">
+            <a class="tradeFour buyLink">Trade $FOUR on Uniswap →</a>
+          </div>
+
           <connect-wallet>
             <div slot="connected">
-              <h4><a class="fourContract">$FOUR</a> Price: <span id="fourPrice2">-.----</span> ETH</h4>
-              <h4>Implied selection probability: <span id="oneProb">-</span>%</h4>
+              <h4><a class="fourContract">$FOUR</a> Price: <span class="fourPrice2">-</span> ETH</h4>
+              <h4>Implied probability: <span class="fourProb" class="probability">-%</span></h4>
+              <h4>Liquidity: <span class="fourPoolSize">-</span> $FOUR</h4>
+              <h4 id="fourBalance2Container">My Balance: <span class="fourBalance"></span> $FOUR</h4>
             </div>
           </connect-wallet>
 
           <p style="font-style: italic;">(If <span class="accent">4</span> is selected, you can redeem each <a class="fourContract">$FOUR</a> coin for 0.0001 ETH)</p>
-          <div style="margin: 1em 0">
-            <a href="" target="_blank" rel="nofollow" class="buyLink">Buy $FOUR on Uniswap →</a>
-          </div>
         </div>
       </article>
 
-      <article id="buyFive">
+      <article id="buyFive" style="paddingf-top: 0.5em">
         <h3>Will it be <span class="accent">5</span><span class="growShrink" style="padding-left:0.15em">?</span></h3>
         <div>
+          <div style="margin: 1.5em 0">
+            <a class="tradeFive buyLink">Trade $FIVE on Uniswap →</a>
+          </div>
+
           <connect-wallet>
             <div slot="connected">
-              <h4><a class="fiveContract">$FIVE</a> Price: <span id="fivePrice2">-.----</span> ETH</h4>
-              <h4>Implied selection probability: <span id="oneProb">-</span>%</h4>
+              <h4><a class="fiveContract">$FIVE</a> Price: <span class="fivePrice2">-</span> ETH</h4>
+              <h4>Implied probability: <span class="fiveProb" class="probability">-%</span></h4>
+              <h4>Liquidity: <span class="fivePoolSize">-</span> $FIVE</h4>
+              <h4 id="fiveBalance2Container">My Balance: <span class="fiveBalance"></span> $FIVE</h4>
             </div>
           </connect-wallet>
 
           <p style="font-style: italic;">(If <span class="accent">5</span> is selected, you can redeem each <a class="fiveContract">$FIVE</a> coin for 0.0001 ETH)</p>
-          <div style="margin: 1em 0">
-            <a href="" target="_blank" rel="nofollow" class="buyLink">Buy $FIVE on Uniswap →</a>
-          </div>
         </div>
       </article>
 
     </section>
 
     <section>
-      <h2 class="">F.A.Q.s</h2>
+      <div style="display: flex; justify-content: center;">
+        <span class="spin percent" style="animation-delay">%</span>
+        <span class="spin percent" style="animation-delay: -0.5s">$</span>
+        <span class="spin percent" style="animation-delay: -1s">%</span>
+      </div>
+    </section>
+
+    <section>
+      <h2 id="faq">F.A.Q.s</h2>
 
       <div style="margin: auto; max-width: 580px;">
         <div class="question"><em>Are any of the NUMBER_COINs financial securities?</em></div>
         <div>No. The market values of <a class="oneContract">$ONE</a>, <a class="twoContract">$TWO</a>, <a class="threeContract">$THREE</a>, <a class="fourContract">$FOUR</a>, and <a class="fiveContract">$FIVE</a> are driven by pure speculative energy, and no holder has a reasonable expectation of profit.</div>
 
-        <div class="question"><em>How do I win a prize?</em></div>
-        <div>In order to win a prize, you must predict the number that the NUMBER_PICKER will pick and buy the corresponding coin. Once a number has been picked, you can claim 0.0001 ETH per winning coin you own. For example, if you purchase 10,000 <a class="threeContract">$THREE</a> coins and <span class="accent">3</span> is picked, you can exchange your <a class="threeContract">$THREE</a> coins for 1 ETH. Alternatively, if <span class="accent">4</span> is picked instead, you will not win a prize.</div>
+        <div class="question"><em>How do I win a PRIZE?</em></div>
+        <div>In order to win a PRIZE, you must predict the number that the NUMBER_PICKER will pick and buy the corresponding coin. Once the number has been picked, you can claim 0.0001 ETH per winning coin you own. For example, if you purchase 10,000 <a class="threeContract">$THREE</a> coins and <span class="accent">3</span> is picked, you can exchange your <a class="threeContract">$THREE</a> coins for 1 ETH. Alternatively, if <span class="accent">4</span> is picked instead, you will not win a PRIZE.</div>
 
         <div class="question"><em>Which number will the NUMBER_PICKER pick?</em></div>
-        <div>The NUMBER_PICKER will pick a number (or delegate number picking responsibilities) at their sole discretion. Once a number is picked it may not be changed, and all holders of the winning coin may claim their prize. The NUMBER_PICKER may arbitrarily change their mind about which number shall be picked up until the moment that the number picking transaction has cleared.</div>
+        <div>The NUMBER_PICKER will pick the number (or delegate number picking responsibilities) at their sole discretion. Once the number is picked it may not be changed, and all holders of the winning coin may claim their PRIZE. The NUMBER_PICKER may arbitrarily change their mind about which number shall be picked up until the moment that the number picking transaction has cleared.</div>
 
-        <div class="question"><em>When will the NUMBER_PICKER pick a number?</em></div>
-        <div>The NUMBER_PICKER will pick a number on an undisclosed future date at their sole discretion.</div>
+        <div class="question"><em>When will the NUMBER_PICKER pick the number?</em></div>
+        <div>The NUMBER_PICKER will pick the number on an undisclosed future date at their sole discretion.</div>
 
         <div class="question"><em>Who is the NUMBER_PICKER?</em></div>
         <div>You can view the current NUMBER_PICKER by viewing the <a class="predictContract">$PREDICT contract</a> and calling the NUMBER_PICKER() function. Initially, this is the deployer of the contract. However, the NUMBER_PICKER role may be transferred to another individual or smart contract at a later date.</div>
 
+        <div class="question"><em>What happens to the PRIZE pool before the number is picked?</em></div>
+        <div>Before the number is picked, you may borrow any portion of the PRIZE pool in a free, uncollateralized flash loan. For more informaiton, contact the NUMBER_PICKER</div>
+
+
+        <div class="question"><em>What happens after the number has been picked?</em></div>
+        <div>After the number has been picked, you can continue to freely trade NUMBER_COINs. However, all liquidity actions (i.e. creating and redeeming baskets of NUMBER_COINs) will be automatically disabled. The NUMBER_COIN corresponding to the picked number can be burnt in exchange for the PRIZE.</div>
+
         <div class="question"><em>Can the NUMBER_PICKER pick another number?</em></div>
         <div>No. The NUMBER_PICKER can only pick <span class="accent">1</span>, <span class="accent">2</span>, <span class="accent">3</span>, <span class="accent">4</span>, or <span class="accent">5</span>.</div>
 
+        <div class="question"><em>Have the Prediction contracts been audited?</em></div>
+        <div>No. Use at your own risk.</div>
+
         <div class="question"><em>Will the NUMBER_PICKER ensure the number is picked fairly?</em></div>
         <div>No. The NUMBER_PICKER can arbitrarily pick any number they want at their full discretion.</div>
+
+        <div class="question"><em>Is this project inspired by David Lynch?</em></div>
+        <div><a href="https://www.youtube.com/watch?v=ihA4ILIzwnw" target="_blank" rel="nofollow">Yes</a>.</div>
       </div>
 
     </section>
@@ -741,10 +1068,10 @@
       <h3 style="text-align: center; margin-bottom: 0.5em;"><span class="blink">$</span> Be a Market Maker! <span class="blink">$</span></h3>
       <ul style="padding-left: 1.5em;">
         <li>Market Makers ensure that the markets for each of the five <em>NUMBER_COINs</em> are liquid and efficient. They do this by creating and redeeming NUMBER_COINs in exchange for the corresponding <em>PRIZE_VALUE</em>.</li>
-        <li>At any point before a number is picked, Market Makers can create a basket of <em>NUMBER_COINs</em>. This can be done by depositing ETH into the prize pool. <em>NUMBER_COINs</em> may be created in any quantity. Depositing 0.0001 ETH will return a basket containing one of each <em>NUMBER_COIN</em> (<a class="oneContract">$ONE</a>, <a class="twoContract">$TWO</a>, <a class="threeContract">$THREE</a>, <a class="fourContract">$FOUR</a>, and <a class="fiveContract">$FIVE</a>).</li>
+        <li>At any point before the number is picked, Market Makers can create a basket of <em>NUMBER_COINs</em>. This can be done by depositing ETH into the prize pool. <em>NUMBER_COINs</em> may be created in any quantity. Depositing 0.0001 ETH will return a basket containing one of each <em>NUMBER_COIN</em> (<a class="oneContract">$ONE</a>, <a class="twoContract">$TWO</a>, <a class="threeContract">$THREE</a>, <a class="fourContract">$FOUR</a>, and <a class="fiveContract">$FIVE</a>).</li>
         <li>Every time a Market Maker creates a new basket of <em>NUMBER_COINs</em>, they are also given a corresponding amount of <a class="predictContract">$PREDICT</a> (Predict Market Maker) coins.</li>
 
-        <li>Before a number is picked, Market Makers may redeem a basket of <em>NUMBER_COINs</em> and <a class="predictContract">$PREDICT</a> for the equivalent <em>PRIZE_VALUE</em>. For example, a Market Maker would receive 1 ETH by redeeming a basket containing 10,000 <a class="oneContract">$ONE</a>, 10,000 <a class="twoContract">$TWO</a>, 10,000 <a class="threeContract">$THREE</a>, 10,000 <a class="fourContract">$FOUR</a>, 10,000 <a class="fiveContract">$FIVE</a>, and 10,000 <a class="predictContract">$PREDICT</a>. <em>NUMBER_COINs</em> and <a class="predictContract">$PREDICT</a> may be redeemed in any quantity.</li>
+        <li>Before the number is picked, Market Makers may redeem a basket of <em>NUMBER_COINs</em> and <a class="predictContract">$PREDICT</a> for the equivalent <em>PRIZE_VALUE</em>. For example, a Market Maker would receive 1 ETH by redeeming a basket containing 10,000 <a class="oneContract">$ONE</a>, 10,000 <a class="twoContract">$TWO</a>, 10,000 <a class="threeContract">$THREE</a>, 10,000 <a class="fourContract">$FOUR</a>, 10,000 <a class="fiveContract">$FIVE</a>, and 10,000 <a class="predictContract">$PREDICT</a>. <em>NUMBER_COINs</em> and <a class="predictContract">$PREDICT</a> may be redeemed in any quantity.</li>
 
         <li><em>ARBITRAGE OPPORTUNITY #1:</em> If the summation of all five <em>NUMBER_COIN</em> market prices exceeds 0.0001 ETH Market Makers can arbitrage the price by creating coins at a lower price than what they can be sold for.</li>
         <li><em>ARBITRAGE OPPORTUNITY #2:</em> If the summation of all five <em>NUMBER_COIN</em> market prices is lower than 0.0001 ETH Market Makers can arbitrage the price by redeeming coins at a higher price than what they can be bought for.</li>
@@ -758,31 +1085,31 @@
             <table style="margin: auto">
               <tr>
                 <td style="padding-right: 1em">ETH</td>
-                <td id="ethBalance">-.---</td>
+                <td class="ethBalance" style="text-align: right;">-.---</td>
               </tr>
               <tr>
                 <td style="padding-right: 1em"><a class="oneContract">$ONE</a></td>
-                <td id="oneBalance">-.---</td>
+                <td class="oneBalance" style="text-align: right">-.---</td>
               </tr>
               <tr>
                 <td style="padding-right: 1em"><a class="twoContract">$TWO</a></td>
-                <td id="twoBalance">-.---</td>
+                <td class="twoBalance" style="text-align: right">-.---</td>
               </tr>
               <tr>
                 <td style="padding-right: 1em"><a class="threeContract">$THREE</a></td>
-                <td id="threeBalance">-.---</td>
+                <td class="threeBalance" style="text-align: right">-.---</td>
               </tr>
               <tr>
                 <td style="padding-right: 1em"><a class="fourContract">$FOUR</a></td>
-                <td id="fourBalance">-.---</td>
+                <td class="fourBalance" style="text-align: right">-.---</td>
               </tr>
               <tr>
                 <td style="padding-right: 1em"><a class="fiveContract">$FIVE</a></td>
-                <td id="fiveBalance">-.---</td>
+                <td class="fiveBalance" style="text-align: right">-.---</td>
               </tr>
               <tr>
                 <td style="padding-right: 1em"><a class="predictContract">$PREDICT</a></td>
-                <td id="predictBalance">-.---</td>
+                <td class="predictBalance" style="text-align: right">-.---</td>
               </tr>
             </table>
 
@@ -794,14 +1121,14 @@
               </tr>
               <tr class="inputRow">
                 <td>
-                  <input id="createInput" type="number" placeholder="Quantity">
+                  <input id="createInput1" type="number" placeholder="Quantity">
                 </td>
                 <td>
-                  <button id="createSubmit" class="buyButton">Create</button>
+                  <button id="createSubmit1" class="buyButton">Create</button>
                 </td>
               </tr>
               <tr>
-                <td class="tertiary" id="createMesage" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
+                <td class="tertiary" id="createMesage1" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
                 <td></td>
               </tr>
 
@@ -811,35 +1138,47 @@
               </tr>
               <tr class="inputRow">
                 <td>
-                  <input id="redeemInput" type="number" placeholder="Quantity">
+                  <input id="redeemInput1" type="number" placeholder="Quantity">
                 </td>
                 <td>
-                  <button id="redeemSubmit" class="buyButton">Redeem</button>
+                  <button id="redeemSubmit1" class="buyButton">Redeem</button>
                 </td>
               </tr>
               <tr>
-                <td class="tertiary" id="redeemMesage" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
-                <td></td>
-              </tr>
-
-
-              <tr class="inputRow">
-                <td><h5 style="transform: translateY(.5em);">Buy <a class="predictContract">$PREDICT</a><span id="predictPrice"></span>:</h5></td>
-                <td></td>
-              </tr>
-              <tr class="inputRow">
-                <td>
-                  <input id="buyPredictInput" type="number" placeholder="Quantity">
-                </td>
-                <td>
-                  <button id="buyPredictSubmit" class="buyButton">Buy</button>
-                </td>
-              </tr>
-              <tr>
-                <td class="tertiary" id="createMesage" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
+                <td class="tertiary" id="redeemMesage1" colspan="2" style="max-width: 250px; font-size: 0.75em;"></td>
                 <td></td>
               </tr>
             </table>
+
+
+            <div id="lpContainer">
+              <div id="lpOneContainer" style="display: flex; align-items: center; flex-direction: column;">
+                <a class="lpOne buyLink">LP $ONE on Uniswap →</a>
+                <div>(Liquidity: <span class="onePoolSize"></span> $ONE)</div>
+              </div>
+              <div id="lpTwoContainer" style="display: flex; align-items: center; flex-direction: column;">
+                <a class="lpTwo buyLink">LP $TWO on Uniswap →</a>
+                <div>(Liquidity: <span class="twoPoolSize"></span> $TWO)</div>
+              </div>
+              <div id="lpThreeContainer" style="display: flex; align-items: center; flex-direction: column;">
+                <a class="lpThree buyLink">LP $THREE on Uniswap →</a>
+                <div>(Liquidity: <span class="threePoolSize"></span> $THREE)</div>
+              </div>
+              <div id="lpFourContainer" style="display: flex; align-items: center; flex-direction: column;">
+                <a class="lpFour buyLink">LP $FOUR on Uniswap →</a>
+                <div>(Liquidity: <span class="fourPoolSize"></span> $FOUR)</div>
+              </div>
+              <div id="lpFiveContainer" style="display: flex; align-items: center; flex-direction: column;">
+                <a class="lpFive buyLink">LP $FIVE on Uniswap →</a>
+                <div>(Liquidity: <span class="fivePoolSize"></span> $FIVE)</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 2.5em; margin-bottom: 1em; display: flex; flex-direction: column; align-items: center;">
+              <a class="tradePredict buyLink">Trade $PREDICT on Uniswap →</a>
+              <h4 style="margin-top: 0.25em">(Current Price: <span class="predictPrice2">-</span> ETH)</h4>
+              <h4 style="margin-top: 0.25em">(Liquidity: <span class="predictPoolSize">-</span> $PREDICT)</h4>
+            </div>
           </div>
         </div>
 
@@ -886,56 +1225,188 @@
 
   provider.setContractInfo(CONTRACTS)
 
-  let activeRow
+  let activeChain = provider.CHAIN_NAMES[provider.FORCED_CHAIN_ID]
+  let uniswapURL = activeChain.includes('sepolia')
+    ? 'https://bafybeidymy5uhlni5456cwgyyj5wlst44gdh5343cfkivvvdysiwok5uam.ipfs.dweb.link/#'
+    : 'https://app.uniswap.org'
 
-  function setRows() {
-    const rows = [
-      $.id('oneRow'),
-      $.id('twoRow'),
-      $.id('threeRow'),
-      $.id('fourRow'),
-      $.id('fiveRow'),
-    ]
-
-    let i = 0
-    for (let row of rows) {
-      i += 1
-      row.onclick = () => {
-        rows.forEach(r => r.classList.remove('active'))
-        row.classList.add('active')
-        console.log(i)
-        activeRow = i
-      }
-    }
-
-  }
+  let uniswapChain = activeChain === 'mainnet'
+    ? ''
+    : `?chain=${activeChain}`
 
 
   const addEtherscanLink = c => l => {
     l.target = '_blank'
     l.rel = 'nofollow'
-    const chainName = provider.CHAIN_NAMES[provider.FORCED_CHAIN_ID]
-    const etherscanLink = provider.ETHERSCAN_URLS[chainName]
-    const contractAddr = CONTRACTS[c].addr[chainName]
+    const etherscanLink = provider.ETHERSCAN_URLS[activeChain]
+    const contractAddr = CONTRACTS[c].addr[activeChain]
     l.href = `${etherscanLink}/address/${contractAddr}#code`
   }
 
-  $.cls('oneContract').forEach(addEtherscanLink('ONE'))
-  $.cls('twoContract').forEach(addEtherscanLink('TWO'))
-  $.cls('threeContract').forEach(addEtherscanLink('THREE'))
-  $.cls('fourContract').forEach(addEtherscanLink('FOUR'))
-  $.cls('fiveContract').forEach(addEtherscanLink('FIVE'))
-  $.cls('predictContract').forEach(addEtherscanLink('PredictTheNumber'))
+  const addUniswapTradeLink = c => l => {
+    l.target = '_blank'
+    l.rel = 'nofollow'
+    l.href = `${uniswapURL}/swap?outputCurrency=${CONTRACTS[c].addr[activeChain]}&inputCurrency=ETH${uniswapChain}`
+  }
 
-  const fmt = (n, decimals) => {
+  const addUniswapLPLink = c => l => {
+    l.target = '_blank'
+    l.rel = 'nofollow'
+    l.href = `${uniswapURL}/add/${CONTRACTS[c].addr[activeChain]}/ETH${uniswapChain}`
+  }
 
+  function setLinks() {
+    $.cls('oneContract').forEach(addEtherscanLink('ONE'))
+    $.cls('twoContract').forEach(addEtherscanLink('TWO'))
+    $.cls('threeContract').forEach(addEtherscanLink('THREE'))
+    $.cls('fourContract').forEach(addEtherscanLink('FOUR'))
+    $.cls('fiveContract').forEach(addEtherscanLink('FIVE'))
+    $.cls('predictContract').forEach(addEtherscanLink('PredictTheNumber'))
+
+    $.cls('tradeOne').forEach(addUniswapTradeLink('ONE'))
+    $.cls('tradeTwo').forEach(addUniswapTradeLink('TWO'))
+    $.cls('tradeThree').forEach(addUniswapTradeLink('THREE'))
+    $.cls('tradeFour').forEach(addUniswapTradeLink('FOUR'))
+    $.cls('tradeFive').forEach(addUniswapTradeLink('FIVE'))
+    $.cls('tradePredict').forEach(addUniswapTradeLink('PredictTheNumber'))
+
+
+    $.cls('lpOne').forEach(addUniswapLPLink('ONE'))
+    $.cls('lpTwo').forEach(addUniswapLPLink('TWO'))
+    $.cls('lpThree').forEach(addUniswapLPLink('THREE'))
+    $.cls('lpFour').forEach(addUniswapLPLink('FOUR'))
+    $.cls('lpFive').forEach(addUniswapLPLink('FIVE'))
+    $.cls('lpPredict').forEach(addUniswapLPLink('PredictTheNumber'))
+  }
+
+  setLinks()
+
+
+
+  const fmtBalance = (n, d=null) => {
+    if (n > 1_000) {
+      return (n/1_000).toFixed(d ?? 2) + 'k'
+    }
+    else if (n > 1_000_000) {
+      return (n/1_000_000).toFixed(d ?? 2) + 'm'
+    }
+    else return n.toFixed(d ?? 2)
   }
 
   provider.onConnect(async (addr) => {
-    setRows()
     try {
-      const {ONE, TWO, THREE, FOUR, FIVE, PredictTheNumber} = await provider.getContracts()
-      const {etherscanLink} = await provider.getNetwork()
+      const {
+        ONE, TWO, THREE, FOUR, FIVE, PredictTheNumber,
+        ONE_POOL, TWO_POOL, THREE_POOL, FOUR_POOL, FIVE_POOL, WETH, PREDICT_POOL
+      } = await provider.getContracts()
+
+      const {etherscanLink, name: networkName} = await provider.getNetwork()
+
+      activeChain = networkName
+      uniswapURL = activeChain.includes('sepolia')
+        ? 'https://bafybeidymy5uhlni5456cwgyyj5wlst44gdh5343cfkivvvdysiwok5uam.ipfs.dweb.link/#'
+        : 'https://app.uniswap.org'
+      uniswapChain = activeChain === 'mainnet'
+        ? ''
+        : `?chain=${activeChain}`
+
+
+
+      const poolPairs = [
+        [ONE, ONE_POOL, 'one'],
+        [TWO, TWO_POOL, 'two'],
+        [THREE, THREE_POOL, 'three'],
+        [FOUR, FOUR_POOL, 'four'],
+        [FIVE, FIVE_POOL, 'five'],
+        [PredictTheNumber, PREDICT_POOL, 'predict'],
+      ]
+
+      let lastUpdated
+      setRunInterval(async () => {
+        lastUpdated = Date.now()
+        let priceSum = 0
+        let balanceSum = 0
+        let lqSum = 0
+
+        for (let [token, pool, id] of poolPairs) {
+          const $price = $.cls(id + 'Price')
+          const $price2 = $.cls(id + 'Price2')
+          const $price3 = $.cls(id + 'Price3')
+          const $prob = $.cls(id + 'Prob')
+          const $poolSize = $.cls(id + 'PoolSize')
+
+          const ncTokenBalance = ethVal(await token.balanceOf(pool.address))
+          const wethBalance = ethVal(await WETH.balanceOf(pool.address))
+
+          const price = wethBalance / ncTokenBalance
+
+          if (id !== 'predict') {
+            priceSum += price
+            lqSum += ncTokenBalance
+          }
+
+          $price.forEach(p => p.innerHTML = (10000 * price).toFixed(2))
+          $price2.forEach(p => p.innerHTML = price.toFixed(6))
+          $price3.forEach(p => p.innerHTML = (10000 * price).toFixed(6))
+          $prob.forEach(p => p.innerHTML = (1000000 * price).toFixed(2) + '<span class="growShrink" style="margin-left: 0.25em; animation-delay: -0.5s">%</span>')
+          $poolSize.forEach(p => p.innerHTML = fmtBalance(ncTokenBalance))
+        }
+
+        $.id('priceSum').innerHTML = (priceSum*10000).toFixed(6)
+        $.id('lqSum').innerHTML = fmtBalance(lqSum)
+
+      }, 6000)
+
+      setRunInterval(() => {
+        $.id('lastUpdated').innerHTML = Math.round((Date.now() - lastUpdated)/1000)
+      }, 1000)
+
+      // TODO last updated s
+
+      setLinks()
+
+
+/*
+// SWAP
+
+
+
+function swap(
+    address recipient,
+    bool zeroForOne,             // true if swapping token0 for token1, false otherwise
+    int256 amountSpecified,      // positive for exact input swaps, negative for exact output swaps
+    uint160 sqrtPriceLimitX96,   // price limit (optional)
+    bytes calldata data          // callback data (for flash swaps or custom behavior)
+) external returns (int256 amount0, int256 amount1);
+
+
+// token0: number coin
+// token1: WETH
+
+1. approve spending of WETH token
+
+BUYING 1ETH worth
+  recipient: me
+  zeroForOne: false
+  amountSpecified: 1000000000000000000
+  sqrtPriceLimitX96: 0
+  data: ''
+
+1. approve spending of NC token
+SELLING 1ETH worth of NC
+  recipient: me
+  zeroForOne: true
+  amountSpecified: -1000000000000000000
+  sqrtPriceLimitX96: 0
+  data: ''
+
+
+
+
+
+*/
+
+
 
       const PRIZE_PER_COIN = ethVal(await PredictTheNumber.PRIZE_PER_COIN())
 
@@ -950,96 +1421,181 @@
         fiveBalance = ethVal(await FIVE.balanceOf(addr))
         predictBalance = ethVal(await PredictTheNumber.balanceOf(addr))
 
-        $.id('ethBalance').innerHTML = (await provider.getETHBalance(addr)).toFixed(4)
-        $.id('oneBalance').innerHTML = oneBalance.toFixed(4)
-        $.id('twoBalance').innerHTML = twoBalance.toFixed(4)
-        $.id('threeBalance').innerHTML = threeBalance.toFixed(4)
-        $.id('fourBalance').innerHTML = fourBalance.toFixed(4)
-        $.id('fiveBalance').innerHTML = fiveBalance.toFixed(4)
-        $.id('predictBalance').innerHTML = predictBalance.toFixed(4)
+        const ethBalance = (await provider.getETHBalance(addr))
+        $.cls('ethBalance').forEach(b => b.innerHTML = fmtBalance(ethBalance))
+        $.cls('oneBalance').forEach(b => b.innerHTML = fmtBalance(oneBalance))
+        $.cls('twoBalance').forEach(b => b.innerHTML = fmtBalance(twoBalance))
+        $.cls('threeBalance').forEach(b => b.innerHTML = fmtBalance(threeBalance))
+        $.cls('fourBalance').forEach(b => b.innerHTML = fmtBalance(fourBalance))
+        $.cls('fiveBalance').forEach(b => b.innerHTML = fmtBalance(fiveBalance))
+        $.cls('predictBalance').forEach(b => b.innerHTML = fmtBalance(predictBalance))
+
+        $.id('balanceSum').innerHTML = fmtBalance(oneBalance + twoBalance + threeBalance + fourBalance + fiveBalance)
+
+
+
+        let anyBalance
+
+        if (oneBalance > 0.000000001) {
+          $.id('oneBalance2Container').classList.remove('hidden')
+          $.id('lpOneContainer').classList.remove('hidden')
+          anyBalance = true
+        } else {
+          $.id('oneBalance2Container').classList.add('hidden')
+          $.id('lpOneContainer').classList.add('hidden')
+        }
+
+        if (twoBalance > 0.000000001) {
+          $.id('twoBalance2Container').classList.remove('hidden')
+          $.id('lpTwoContainer').classList.remove('hidden')
+          anyBalance = true
+        } else {
+          $.id('twoBalance2Container').classList.add('hidden')
+          $.id('lpTwoContainer').classList.add('hidden')
+        }
+
+        if (threeBalance > 0.000000001) {
+          $.id('threeBalance2Container').classList.remove('hidden')
+          $.id('lpThreeContainer').classList.remove('hidden')
+          anyBalance = true
+        } else {
+          $.id('threeBalance2Container').classList.add('hidden')
+          $.id('lpThreeContainer').classList.add('hidden')
+        }
+
+        if (fourBalance > 0.000000001) {
+          $.id('fourBalance2Container').classList.remove('hidden')
+          $.id('lpFourContainer').classList.remove('hidden')
+          anyBalance = true
+        } else {
+          $.id('fourBalance2Container').classList.add('hidden')
+          $.id('lpFourContainer').classList.add('hidden')
+        }
+
+        if (fiveBalance > 0.000000001) {
+          $.id('fiveBalance2Container').classList.remove('hidden')
+          $.id('lpFiveContainer').classList.remove('hidden')
+          anyBalance = true
+        } else {
+          $.id('fiveBalance2Container').classList.add('hidden')
+          $.id('lpFiveContainer').classList.add('hidden')
+        }
+
+        if (anyBalance) {
+          $.id('lpContainer').classList.remove('hidden')
+        } else {
+          $.id('lpContainer').classList.add('hidden')
+        }
+
       }
 
       renderBalances()
 
 
-      const $createMessage = $.id('createMesage')
-      const $redeemMessage = $.id('redeemMesage')
+      function lqdFunctions(n) {
+        const $createInput = $.id('createInput' + n)
+        const $createSubmit = $.id('createSubmit' + n)
+        const $createMessage = $.id('createMesage' + n)
+        const $redeemInput = $.id('redeemInput' + n)
+        const $redeemSubmit = $.id('redeemSubmit' + n)
+        const $redeemMessage = $.id('redeemMesage' + n)
 
-      $.id('createInput').onkeyup = (e) => {
-        if (e.target.value > 0) {
-          $createMessage.innerHTML = `(-${(e.target.value * PRIZE_PER_COIN).toFixed(4)} ETH)`
+        $createInput.onkeyup = (e) => {
+          if (e.target.value > 0) {
+            $createMessage.innerHTML = `(-${(e.target.value * PRIZE_PER_COIN).toFixed(4)} ETH)`
+          } else {
+            $createMessage.innerHTML = ''
+          }
+        }
+
+        $redeemInput.onkeyup = (e) => {
+          if (e.target.value > oneBalance) {
+            $redeemMessage.innerHTML = `Insufficient $ONE balance`
+
+          } else if (e.target.value > twoBalance) {
+            $redeemMessage.innerHTML = `Insufficient $TWO balance`
+
+          } else if (e.target.value > threeBalance) {
+            $redeemMessage.innerHTML = `Insufficient $THREE balance`
+
+          } else if (e.target.value > fourBalance) {
+            $redeemMessage.innerHTML = `Insufficient $FOUR balance`
+
+          } else if (e.target.value > fiveBalance) {
+            $redeemMessage.innerHTML = `Insufficient $FIVE balance`
+
+          } else if (e.target.value > predictBalance) {
+            $redeemMessage.innerHTML = `Insufficient $PREDICT balance`
+
+          } else if (e.target.value > 0) {
+            $redeemMessage.innerHTML = `(+${(e.target.value * PRIZE_PER_COIN).toFixed(4)} ETH)`
+          } else {
+            $redeemMessage.innerHTML = ''
+          }
+        }
+
+        $createSubmit.onclick = async (e) => {
+          const createAmount = Number($createInput.value)
+          const createETHAmount = createAmount * PRIZE_PER_COIN
+
+          $createMessage.innerHTML = '<span class="blinkSlow">TX Pending</span>'
+
+          try {
+            const tx = await PredictTheNumber.create(txValue(createETHAmount))
+            $createMessage.innerHTML = `<span class="blinkSlow">TX Pending.</span> <a href="${etherscanLink}/tx/${tx.hash}" target="_blank" rel="nofollow">View on etherscan</a>`
+            const txReciept1 = await tx.wait(1)
+            $createMessage.innerHTML = `Success`
+            $createInput.value = ''
+            setTimeout(() => {
+              $createMessage.innerHTML = ``
+            }, 3000)
+            renderBalances()
+          } catch (e) {
+            $createMessage.innerHTML =  e?.data?.message || e?.error?.message || e?.message || 'Something went wrong'
+            console.error(e)
+          }
+        }
+
+        $redeemSubmit.onclick = async (e) => {
+          const redeemAmount = Number($redeemInput.value)
+
+          $redeemMessage.innerHTML = '<span class="blinkSlow">TX Pending</span>'
+
+          try {
+            const tx = await PredictTheNumber.redeem(toETH(redeemAmount))
+            $redeemMessage.innerHTML = `<span class="blinkSlow">TX Pending.</span> <a href="${etherscanLink}/tx/${tx.hash}" target="_blank" rel="nofollow">View on etherscan</a>`
+            const txReciept1 = await tx.wait(1)
+            $createInput.value = ''
+            $redeemMessage.innerHTML = `Success`
+            setTimeout(() => {
+              $redeemMessage.innerHTML = ``
+            }, 3000)
+            renderBalances()
+          } catch (e) {
+            $redeemMessage.innerHTML =  e?.data?.message || e?.error?.message || e?.message || 'Something went wrong'
+            console.error(e)
+          }
+        }
+
+      }
+
+      lqdFunctions(1)
+      lqdFunctions(2)
+
+
+      let advancedView = false
+      $.id('toggleView').onclick = () => {
+        advancedView = !advancedView
+        $.id('toggleView').innerHTML = advancedView ? 'Simplified View' : 'Advanced View'
+
+        if (advancedView) {
+          $.id('simplifiedView').classList.add('hidden')
+          $.id('advancedView').classList.remove('hidden')
         } else {
-          $createMessage.innerHTML = ''
+          $.id('simplifiedView').classList.remove('hidden')
+          $.id('advancedView').classList.add('hidden')
         }
-      }
 
-      $.id('redeemInput').onkeyup = (e) => {
-        if (e.target.value > oneBalance) {
-          $redeemMessage.innerHTML = `Insufficient $ONE balance`
-
-        } else if (e.target.value > twoBalance) {
-          $redeemMessage.innerHTML = `Insufficient $TWO balance`
-
-        } else if (e.target.value > threeBalance) {
-          $redeemMessage.innerHTML = `Insufficient $THREE balance`
-
-        } else if (e.target.value > fourBalance) {
-          $redeemMessage.innerHTML = `Insufficient $FOUR balance`
-
-        } else if (e.target.value > fiveBalance) {
-          $redeemMessage.innerHTML = `Insufficient $FIVE balance`
-
-        } else if (e.target.value > predictBalance) {
-          $redeemMessage.innerHTML = `Insufficient $PREDICT balance`
-
-        } else if (e.target.value > 0) {
-          $redeemMessage.innerHTML = `(+${(e.target.value * PRIZE_PER_COIN).toFixed(4)} ETH)`
-        } else {
-          $redeemMessage.innerHTML = ''
-        }
-      }
-
-      $.id('createSubmit').onclick = async (e) => {
-        const createAmount = Number($.id('createInput').value)
-        const createETHAmount = createAmount * PRIZE_PER_COIN
-
-        $createMessage.innerHTML = '<span class="blinkSlow">TX Pending</span>'
-
-        try {
-          const tx = await PredictTheNumber.create(txValue(createETHAmount))
-          $createMessage.innerHTML = `<span class="blinkSlow">TX Pending.</span> <a href="${etherscanLink}/tx/${tx.hash}" target="_blank" rel="nofollow">View on etherscan</a>`
-          const txReciept1 = await tx.wait(1)
-          $createMessage.innerHTML = `Success`
-          $.id('createInput').value = ''
-          setTimeout(() => {
-            $createMessage.innerHTML = ``
-          }, 3000)
-          renderBalances()
-        } catch (e) {
-          $createMessage.innerHTML =  e?.data?.message || e?.error?.message || e?.message || 'Something went wrong'
-          console.error(e)
-        }
-      }
-
-      $.id('redeemSubmit').onclick = async (e) => {
-        const redeemAmount = Number($.id('redeemInput').value)
-
-        $redeemMessage.innerHTML = '<span class="blinkSlow">TX Pending</span>'
-
-        try {
-          const tx = await PredictTheNumber.redeem(toETH(redeemAmount))
-          $redeemMessage.innerHTML = `<span class="blinkSlow">TX Pending.</span> <a href="${etherscanLink}/tx/${tx.hash}" target="_blank" rel="nofollow">View on etherscan</a>`
-          const txReciept1 = await tx.wait(1)
-          $.id('createInput').value = ''
-          $redeemMessage.innerHTML = `Success`
-          setTimeout(() => {
-            $redeemMessage.innerHTML = ``
-          }, 3000)
-          renderBalances()
-        } catch (e) {
-          $redeemMessage.innerHTML =  e?.data?.message || e?.error?.message || e?.message || 'Something went wrong'
-          console.error(e)
-        }
       }
 
 
