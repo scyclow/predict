@@ -311,6 +311,10 @@
       animation: GrowShrinkMid 1.5s cubic-bezier(0.58, 0.06, 0.44, 0.98) infinite;
     }
 
+    .growShrinkMedium {
+      animation: GrowShrinkMedium 1s cubic-bezier(0.58, 0.06, 0.44, 0.98) infinite;
+    }
+
     .buyLink {
       border: 1px dashed;
       transition: 300ms;
@@ -374,6 +378,16 @@
       50% {
         transform: scale(0.85) ;
         color: var(--font-color);
+      }
+    }
+
+
+    @keyframes GrowShrinkMedium {
+      0%, 100% {
+        transform: scale(1.15) ;
+      }
+      50% {
+        transform: scale(0.85) ;
       }
     }
 
@@ -647,9 +661,9 @@
       <h2 class="">How does it work?</h2>
 
       <ul class="largeList" style="margin: auto;">
+        <li>The <em>NUMBER_PICKER</em> will pick a <em>NUMBER</em>: <span class="accent">1</span>, <span class="accent">2</span>, <span class="accent">3</span>, <span class="accent">4</span>, or <span class="accent">5</span></li>
         <li><em>YOU</em> try to predict the <em>NUMBER</em> by buying a <em>NUMBER_COIN</em>
 
-        <li>The <em>NUMBER_PICKER</em> will pick a <em>NUMBER</em>: <span class="accent">1</span>, <span class="accent">2</span>, <span class="accent">3</span>, <span class="accent">4</span>, or <span class="accent">5</span></li>
 
           <!-- : <a href="#buyOne" class="accent"><a class="oneContract">$ONE</a></a>, <a href="#buyTwo" class="accent"><a class="twoContract">$TWO</a></a>, <a href="#buyThree" class="accent"><a class="threeContract">$THREE</a></a>, <a href="#buyFour" class="accent"><a class="fourContract">$FOUR</a></a>, or <a href="#buyFive" class="accent"><a class="fiveContract">$FIVE</a></a></li> -->
 
@@ -716,7 +730,7 @@
                   <tr >
                     <td style="border-top: 3px solid;"></td>
                     <td style="border-top: 3px solid;">PRIZE:</td>
-                    <td style="border-top: 3px solid; text-align: right;">1.00</td>
+                    <td style="border-top: 3px solid; text-align: right;"><span class="growShrinkMedium" style="display: inline-block; animation-delay: -0.2s;">1.00</span></td>
                     <td style="border-top: 3px solid;"></td>
                   </tr>
                 </tbody>
@@ -730,9 +744,9 @@
                   <tr>
                     <th></th>
                     <th>COIN</th>
-                    <th>PRICE<sup>*</sup></th>
+                    <th>PRICE<sup><a style="text-decoration: none" href="#footnotes">*</a></sup></th>
                     <th>BALANCE</th>
-                    <th>LIQUIDITY</th>
+                    <th>LIQUIDITY<sup><a style="text-decoration: none" href="#footnotes">✝︎</a></sup></th>
                     <th><span>☟ ☟</span></th>
                   </tr>
                 </thead>
@@ -808,10 +822,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h6 style="margin-top:0.25em; text-align: center; font-style: italic;">(* ETH Per 10,000 Coins)</h6>
 
-              <!-- <h5 style="text-align: center; margin: 1em 0">→ <a href="#mmSection">Add Liquidity</a> ←</h5> -->
-              <h6 class="lastUpdated">Last Updated: <span id="lastUpdated"></span>s ago</h6>
 
               <div style="margin:1em 0">
 
@@ -820,9 +831,9 @@
                     <tr>
                       <th></th>
                       <th>COIN</th>
-                      <th>PRICE<sup>*</sup></th>
+                      <th>PRICE<sup><a style="text-decoration: none" href="#footnotes">*</a></sup></th>
                       <th>BALANCE</th>
-                      <th>LIQUIDITY</th>
+                      <th>LIQUIDITY<sup><a style="text-decoration: none" href="#footnotes">✝︎</a></sup></th>
                       <th><span>☟ ☟</span></th>
                     </tr>
                   </thead>
@@ -882,6 +893,15 @@
                   <a href="#mmSection">Learn more about Market Making</a>
                 </div>
               </div>
+
+              <div id="footnotes" style="padding: 1em 0">
+                <h6 style="margin-top:0.25em; font-style: italic;">* ETH Per 10,000 Coins</h6>
+                <h6 style="margin-top:0.25em; font-style: italic;">✝︎ Quantity of NUMBER_COIN deposited in Uniswap LP</h6>
+              </div>
+
+              <!-- <h5 style="text-align: center; margin: 1em 0">→ <a href="#mmSection">Add Liquidity</a> ←</h5> -->
+              <h6 class="lastUpdated">Last Updated: <span id="lastUpdated"></span>s ago</h6>
+
             </div>
 
             <h5 style="margin-top: 0.25em; text-align: center;"><span class="blink">☞</span> <span id="toggleView">Advanced View</span></h5>
@@ -925,7 +945,7 @@
 
 
     <section>
-      <article id="buyOne" style="paddingf-top: 0.5em">
+      <article id="buyOne" style="padding-top: 0.5em">
         <h3>Will it be <span class="accent">1</span><span class="growShrink" style="padding-left:0.15em">?</span></h3>
         <div>
           <div style="margin: 1.5em 0">
@@ -934,18 +954,18 @@
 
           <connect-wallet>
             <div slot="connected">
-              <h4><a class="oneContract">$ONE</a> Price: <span claclass="onePrie22">-</span> ETH</h4>
-              <h4>Implied probability: <span class="oneProb" class="probability">-%</span></h4>
-              <h4>Liquidity: <span class="onePoolSize">-</span> $ONE</h4>
+              <h4><a class="oneContract">$ONE</a> Price: <span class="onePrice2">-</span> ETH</h4>
+              <h4>Implied Probability: <span class="oneProb" class="probability">-%</span></h4>
+              <h4>LP Liquidity: <span class="onePoolSize">-</span> $ONE</h4>
               <h4 id="oneBalance2Container">My Balance: <span class="oneBalance"></span> $ONE</h4>
             </div>
           </connect-wallet>
 
-          <p style="font-style: italic;">(If <span class="accent">1</span> is selected, you can redeem each <a class="oneContract">$ONE</a> coin for 0.0001 ETH)</p>
+          <p style="font-style: italic;">(If <span class="accent">1</span> is picked, you can redeem each <a class="oneContract">$ONE</a> coin for 0.0001 ETH)</p>
         </div>
       </article>
 
-      <article id="buyTwo" style="paddingf-top: 0.5em">
+      <article id="buyTwo" style="padding-top: 0.5em">
         <h3>Will it be <span class="accent">2</span><span class="growShrink" style="padding-left:0.15em">?</span></h3>
         <div>
           <div style="margin: 1.5em 0">
@@ -955,17 +975,17 @@
           <connect-wallet>
             <div slot="connected">
               <h4><a class="twoContract">$TWO</a> Price: <span class="twoPrice2">-</span> ETH</h4>
-              <h4>Implied probability: <span class="twoProb" class="probability">-%</span></h4>
-              <h4>Liquidity: <span class="twoPoolSize">-</span> $TWO</h4>
+              <h4>Implied Probability: <span class="twoProb" class="probability">-%</span></h4>
+              <h4>LP Liquidity: <span class="twoPoolSize">-</span> $TWO</h4>
               <h4 id="twoBalance2Container">My Balance: <span class="twoBalance"></span> $TWO</h4>
             </div>
           </connect-wallet>
 
-          <p style="font-style: italic;">(If <span class="accent">2</span> is selected, you can redeem each <a class="twoContract">$TWO</a> coin for 0.0001 ETH)</p>
+          <p style="font-style: italic;">(If <span class="accent">2</span> is picked, you can redeem each <a class="twoContract">$TWO</a> coin for 0.0001 ETH)</p>
         </div>
       </article>
 
-      <article id="buyThree" style="paddingf-top: 0.5em">
+      <article id="buyThree" style="padding-top: 0.5em">
         <h3>Will it be <span class="accent">3</span><span class="growShrink" style="padding-left:0.15em">?</span></h3>
         <div>
           <div style="margin: 1.5em 0">
@@ -974,18 +994,18 @@
 
           <connect-wallet>
             <div slot="connected">
-              <h4><a class="threeContract">$THREE</a> Price: <span class="threePric22">-</span> ETH</h4>
-              <h4>Implied probability: <span class="threeProb" class="probability">-%</span></h4>
-              <h4>Liquidity: <span class="threePoolSize">-</span> $THREE</h4>
+              <h4><a class="threeContract">$THREE</a> Price: <span class="threePrice2">-</span> ETH</h4>
+              <h4>Implied Probability: <span class="threeProb" class="probability">-%</span></h4>
+              <h4>LP Liquidity: <span class="threePoolSize">-</span> $THREE</h4>
               <h4 id="threeBalance2Container">My Balance: <span class="threeBalance"></span> $THREE</h4>
             </div>
           </connect-wallet>
 
-          <p style="font-style: italic;">(If <span class="accent">3</span> is selected, you can redeem each <a class="threeContract">$THREE</a> coin for 0.0001 ETH)</p>
+          <p style="font-style: italic;">(If <span class="accent">3</span> is picked, you can redeem each <a class="threeContract">$THREE</a> coin for 0.0001 ETH)</p>
         </div>
       </article>
 
-      <article id="buyFour" style="paddingf-top: 0.5em">
+      <article id="buyFour" style="padding-top: 0.5em">
         <h3>Will it be <span class="accent">4</span><span class="growShrink" style="padding-left:0.15em">?</span></h3>
         <div>
           <div style="margin: 1.5em 0">
@@ -995,17 +1015,17 @@
           <connect-wallet>
             <div slot="connected">
               <h4><a class="fourContract">$FOUR</a> Price: <span class="fourPrice2">-</span> ETH</h4>
-              <h4>Implied probability: <span class="fourProb" class="probability">-%</span></h4>
-              <h4>Liquidity: <span class="fourPoolSize">-</span> $FOUR</h4>
+              <h4>Implied Probability: <span class="fourProb" class="probability">-%</span></h4>
+              <h4>LP Liquidity: <span class="fourPoolSize">-</span> $FOUR</h4>
               <h4 id="fourBalance2Container">My Balance: <span class="fourBalance"></span> $FOUR</h4>
             </div>
           </connect-wallet>
 
-          <p style="font-style: italic;">(If <span class="accent">4</span> is selected, you can redeem each <a class="fourContract">$FOUR</a> coin for 0.0001 ETH)</p>
+          <p style="font-style: italic;">(If <span class="accent">4</span> is picked, you can redeem each <a class="fourContract">$FOUR</a> coin for 0.0001 ETH)</p>
         </div>
       </article>
 
-      <article id="buyFive" style="paddingf-top: 0.5em">
+      <article id="buyFive" style="padding-top: 0.5em">
         <h3>Will it be <span class="accent">5</span><span class="growShrink" style="padding-left:0.15em">?</span></h3>
         <div>
           <div style="margin: 1.5em 0">
@@ -1015,13 +1035,13 @@
           <connect-wallet>
             <div slot="connected">
               <h4><a class="fiveContract">$FIVE</a> Price: <span class="fivePrice2">-</span> ETH</h4>
-              <h4>Implied probability: <span class="fiveProb" class="probability">-%</span></h4>
-              <h4>Liquidity: <span class="fivePoolSize">-</span> $FIVE</h4>
+              <h4>Implied Probability: <span class="fiveProb" class="probability">-%</span></h4>
+              <h4>LP Liquidity: <span class="fivePoolSize">-</span> $FIVE</h4>
               <h4 id="fiveBalance2Container">My Balance: <span class="fiveBalance"></span> $FIVE</h4>
             </div>
           </connect-wallet>
 
-          <p style="font-style: italic;">(If <span class="accent">5</span> is selected, you can redeem each <a class="fiveContract">$FIVE</a> coin for 0.0001 ETH)</p>
+          <p style="font-style: italic;">(If <span class="accent">5</span> is picked, you can redeem each <a class="fiveContract">$FIVE</a> coin for 0.0001 ETH)</p>
         </div>
       </article>
 
