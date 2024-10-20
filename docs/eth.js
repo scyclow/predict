@@ -266,6 +266,17 @@ export class Web3Provider {
     }
     return output
   }
+
+  async addCoin(address, symbol, image='') {
+    const connected = await window.ethereum.request({
+      method: 'wallet_watchAsset',
+      params: {
+        type: 'ERC20',
+        options: { address, symbol, image, decimals: 18 },
+      }
+    })
+
+  }
 }
 
 

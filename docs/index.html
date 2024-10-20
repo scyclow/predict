@@ -176,6 +176,31 @@
       border-color: var(--font-color);
     }
 
+
+    .addButton {
+      background: var(--font-color);
+      border-color: var(--bg-color);
+      color: var(--bg-color);
+      padding: 0.5em 1em;
+      border: 1px solid;
+      border-radius: 3px;
+      font-size: 0.75em;
+      font-weight: bold;
+      transition: .15s;
+      display: inline-block;
+    }
+
+    .addButton:hover {
+      background: var(--light-color);
+      color: var(--bg-color);
+      border-color: var(--bg-color);
+    }
+    .addButton:active {
+      background: var(--bg-color);
+      color: var(--font-color);
+      border-color: var(--font-color);
+    }
+
     .arrow {
       font-size: 2em;
     }
@@ -960,6 +985,7 @@
               <h4>Implied Probability: <span class="oneProb" class="probability">-%</span></h4>
               <h4>LP Liquidity: <span class="onePoolSize">-</span> $ONE</h4>
               <h4 id="oneBalance2Container">My Balance: <span class="oneBalance"></span> $ONE</h4>
+              <div style="margin:0.25em 0"><button id="oneAdd" class="addButton">Add $ONE to Wallet</button></div>
             </div>
           </connect-wallet>
 
@@ -980,6 +1006,7 @@
               <h4>Implied Probability: <span class="twoProb" class="probability">-%</span></h4>
               <h4>LP Liquidity: <span class="twoPoolSize">-</span> $TWO</h4>
               <h4 id="twoBalance2Container">My Balance: <span class="twoBalance"></span> $TWO</h4>
+              <div style="margin:0.25em 0"><button id="twoAdd" class="addButton">Add $TWO to Wallet</button></div>
             </div>
           </connect-wallet>
 
@@ -1000,6 +1027,7 @@
               <h4>Implied Probability: <span class="threeProb" class="probability">-%</span></h4>
               <h4>LP Liquidity: <span class="threePoolSize">-</span> $THREE</h4>
               <h4 id="threeBalance2Container">My Balance: <span class="threeBalance"></span> $THREE</h4>
+              <div style="margin:0.25em 0"><button id="threeAdd" class="addButton">Add $THREE to Wallet</button></div>
             </div>
           </connect-wallet>
 
@@ -1020,6 +1048,7 @@
               <h4>Implied Probability: <span class="fourProb" class="probability">-%</span></h4>
               <h4>LP Liquidity: <span class="fourPoolSize">-</span> $FOUR</h4>
               <h4 id="fourBalance2Container">My Balance: <span class="fourBalance"></span> $FOUR</h4>
+              <div style="margin:0.25em 0"><button id="fourAdd" class="addButton">Add $FOUR to Wallet</button></div>
             </div>
           </connect-wallet>
 
@@ -1040,6 +1069,7 @@
               <h4>Implied Probability: <span class="fiveProb" class="probability">-%</span></h4>
               <h4>LP Liquidity: <span class="fivePoolSize">-</span> $FIVE</h4>
               <h4 id="fiveBalance2Container">My Balance: <span class="fiveBalance"></span> $FIVE</h4>
+              <div style="margin:0.25em 0"><button id="fiveAdd" class="addButton">Add $FIVE to Wallet</button></div>
             </div>
           </connect-wallet>
 
@@ -1222,6 +1252,9 @@
               <h4 style="margin-top: 0.25em">(Current Price: <span class="predictPrice2">-</span> ETH)</h4>
               <h4 style="margin-top: 0.25em">(Liquidity: <span class="predictPoolSize">-</span> $PREDICT)</h4>
             </div>
+
+            <div style="margin:0.25em 0; text-align: center;"><button id="predictAdd" class="addButton">Add $PREDICT to Wallet</button></div>
+
           </div>
         </div>
 
@@ -1439,6 +1472,30 @@
       }
 
       renderBalances()
+
+      $.id('oneAdd').onclick = () => {
+        provider.addCoin(ONE.address, 'ONE', 'https://predict.steviep.xyz/assets/1.png')
+      }
+
+      $.id('twoAdd').onclick = () => {
+        provider.addCoin(TWO.address, 'TWO', 'https://predict.steviep.xyz/assets/2.png')
+      }
+
+      $.id('threeAdd').onclick = () => {
+        provider.addCoin(THREE.address, 'THREE', 'https://predict.steviep.xyz/assets/3.png')
+      }
+
+      $.id('fourAdd').onclick = () => {
+        provider.addCoin(FOUR.address, 'FOUR', 'https://predict.steviep.xyz/assets/4.png')
+      }
+
+      $.id('fiveAdd').onclick = () => {
+        provider.addCoin(FIVE.address, 'FIVE', 'https://predict.steviep.xyz/assets/5.png')
+      }
+
+      $.id('predictAdd').onclick = () => {
+        provider.addCoin(PredictTheNumber.address, 'PREDICT', 'https://predict.steviep.xyz/assets/predict.png')
+      }
 
 
 
