@@ -1697,9 +1697,9 @@ SELLING 1ETH worth of NC
       lqdFunctions(2)
 
 
-      let advancedView = false
-      $.id('toggleView').onclick = () => {
-        advancedView = !advancedView
+      let advancedView = ls.get('advancedView') || false
+
+      const toggleAdvanced = () => {
         $.id('toggleView').innerHTML = advancedView ? 'Simplified View' : 'Advanced View'
 
         if (advancedView) {
@@ -1709,7 +1709,14 @@ SELLING 1ETH worth of NC
           $.id('simplifiedView').classList.remove('hidden')
           $.id('advancedView').classList.add('hidden')
         }
+      }
 
+      if (advancedView) toggleAdvanced()
+
+      $.id('toggleView').onclick = () => {
+        advancedView = !advancedView
+        ls.set('advancedView', advancedView)
+        toggleAdvanced()
       }
 
 
