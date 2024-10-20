@@ -739,6 +739,7 @@
             </div>
 
             <div id="advancedView" class="borderContainer hidden">
+              <h4 style="text-align: center; margin: 0.25em 0; font-style: italic;"><span style="font-size: 1.5em;">⥃</span> Trading <span style="font-size: 1.5em;">⥂</span></h4>
               <table class="advancedTable">
                 <thead>
                   <tr>
@@ -747,7 +748,7 @@
                     <th>PRICE<sup><a style="text-decoration: none" href="#footnotes">*</a></sup></th>
                     <th>BALANCE</th>
                     <th>LIQUIDITY<sup><a style="text-decoration: none" href="#footnotes">✝︎</a></sup></th>
-                    <th><span>☟ ☟</span></th>
+                    <th><span style="display: inline-block; transform: translateX(-0.5em);">☟</span><span style="display: inline-block;transform: translateX(1.5em);">☟</span></th>
                   </tr>
                 </thead>
 
@@ -756,8 +757,8 @@
                     <td><span class="accent">1</span></td>
                     <td><a class="oneContract">$ONE</a></td>
                     <td><span class="onePrice3">-.--</span></td>
-                    <td class="oneBalance">-</td>
-                    <td class="onePoolSize">-</td>
+                    <td class="oneBalance">0</td>
+                    <td class="onePoolSize">0</td>
                     <td style="padding-left: 1em">
                       <a class="tradeOne">Trade</a>
                       <a class="lpOne">LP</a>
@@ -768,8 +769,8 @@
                     <td><span class="accent">2</span></td>
                     <td><a class="twoContract">$TWO</a></td>
                     <td><span class="twoPrice3">-.--</span></td>
-                    <td class="twoBalance">-</td>
-                    <td class="twoPoolSize">-</td>
+                    <td class="twoBalance">0</td>
+                    <td class="twoPoolSize">0</td>
                     <td style="padding-left: 1em">
                       <a class="tradeTwo">Trade</a>
                       <a class="lpTwo">LP</a>
@@ -780,8 +781,8 @@
                     <td><span class="accent">3</span></td>
                     <td><a class="threeContract">$THREE</a></td>
                     <td><span class="threePrice3">-.--</span></td>
-                    <td class="threeBalance">-</td>
-                    <td class="threePoolSize">-</td>
+                    <td class="threeBalance">0</td>
+                    <td class="threePoolSize">0</td>
                     <td style="padding-left: 1em">
                       <a class="tradeThree">Trade</a>
                       <a class="lpThree">LP</a>
@@ -792,8 +793,8 @@
                     <td><span class="accent">4</span></td>
                     <td><a class="fourContract">$FOUR</a></td>
                     <td><span class="fourPrice3">-.--</span></td>
-                    <td class="fourBalance">-</td>
-                    <td class="fourPoolSize">-</td>
+                    <td class="fourBalance">0</td>
+                    <td class="fourPoolSize">0</td>
                     <td style="padding-left: 1em">
                       <a class="tradeFour">Trade</a>
                       <a class="lpFour">LP</a>
@@ -804,8 +805,8 @@
                     <td><span class="accent">5</span></td>
                     <td><a class="fiveContract">$FIVE</a></td>
                     <td><span class="fivePrice3">-.--</span></td>
-                    <td class="fiveBalance">-</td>
-                    <td class="fivePoolSize">-</td>
+                    <td class="fiveBalance">0</td>
+                    <td class="fivePoolSize">0</td>
                     <td style="padding-left: 1em">
                       <a class="tradeFive">Trade</a>
                       <a class="lpFive">LP</a>
@@ -815,18 +816,19 @@
                   <tr>
                     <td></td>
                     <td></td>
-                    <td style="border-top: 1px solid"><span id="priceSum">-</span></td>
-                    <td style="border-top: 1px solid"><span id="balanceSum"></td>
-                    <td style="border-top: 1px solid"><span id="lqSum"></td>
+                    <td style="border-top: 1px solid"><span id="priceSum">-.--</span></td>
+                    <td style="border-top: 1px solid"><span id="balanceSum">0</td>
+                    <td style="border-top: 1px solid"><span id="lqSum">0</td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
 
 
-              <div style="margin:1em 0">
+              <div style="margin-top: 3em; margin-bottom: 1em;">
+                <h4 style="text-align: center; margin: 0.25em 0; font-style: italic;"><span style="font-size: 1.5em;">⥈</span> Market Making <span style="font-size: 1.5em;">⥈</span></h4>
 
-                <table class="advancedTable" style="margin-top: 3em">
+                <table class="advancedTable">
                   <thead>
                     <tr>
                       <th></th>
@@ -834,7 +836,7 @@
                       <th>PRICE<sup><a style="text-decoration: none" href="#footnotes">*</a></sup></th>
                       <th>BALANCE</th>
                       <th>LIQUIDITY<sup><a style="text-decoration: none" href="#footnotes">✝︎</a></sup></th>
-                      <th><span>☟ ☟</span></th>
+                      <th><span style="display: inline-block; transform: translateX(-0.5em);">☟</span><span style="display: inline-block;transform: translateX(1.5em);">☟</span></th>
                     </tr>
                   </thead>
 
@@ -843,8 +845,8 @@
                       <td></td>
                       <td><a class="predictContract">$PREDICT</a></td>
                       <td ><span class="predictPrice3">-.--</span></td>
-                      <td class="predictBalance">-</td>
-                      <td class="predictPoolSize">-</td>
+                      <td class="predictBalance">0</td>
+                      <td class="predictPoolSize">0</td>
                       <td style="padding-left: 1em">
                         <a class="tradePredict">Trade</a>
                         <a class="lpPredict">LP</a>
@@ -904,7 +906,7 @@
 
             </div>
 
-            <h5 style="margin-top: 0.25em; text-align: center;"><span class="blink">☞</span> <span id="toggleView">Advanced View</span></h5>
+            <h5 style="margin-top: 0.25em; text-align: center;"><span class="blink" style="display: inline-block; transform: scale(2); padding-right: 0.25em;">☞</span> <span id="toggleView">Advanced View</span></h5>
           </div>
 
           <div slot="notConnected">
@@ -1076,6 +1078,9 @@
 
         <div class="question"><em>Where does the PRIZE pool come from?</em></div>
         <div>See the <a href="#mmSection">Market Maker section</a> to learn more about this topic.</div>
+
+        <div class="question"><em>Where can I view the PredictTheNumber contract?</em></div>
+        <div>Here: <a id="predictContract" class="predictContract"></a></div>
 
 
         <div class="question"><em>What happens to the PRIZE pool before the number is picked?</em></div>
@@ -1315,6 +1320,8 @@
     $.cls('lpFour').forEach(addUniswapLPLink('FOUR'))
     $.cls('lpFive').forEach(addUniswapLPLink('FIVE'))
     $.cls('lpPredict').forEach(addUniswapLPLink('PredictTheNumber'))
+
+    $.id('predictContract').innerHTML = CONTRACTS.PredictTheNumber.addr[activeChain]
   }
 
   setLinks()
@@ -1347,102 +1354,6 @@
       uniswapChain = activeChain === 'mainnet'
         ? ''
         : `?chain=${activeChain}`
-
-
-
-      const poolPairs = [
-        [ONE, ONE_POOL, 'one'],
-        [TWO, TWO_POOL, 'two'],
-        [THREE, THREE_POOL, 'three'],
-        [FOUR, FOUR_POOL, 'four'],
-        [FIVE, FIVE_POOL, 'five'],
-        [PredictTheNumber, PREDICT_POOL, 'predict'],
-      ]
-
-      let lastUpdated
-      setRunInterval(async () => {
-        lastUpdated = Date.now()
-        let priceSum = 0
-        let balanceSum = 0
-        let lqSum = 0
-
-        for (let [token, pool, id] of poolPairs) {
-          const $price = $.cls(id + 'Price')
-          const $price2 = $.cls(id + 'Price2')
-          const $price3 = $.cls(id + 'Price3')
-          const $prob = $.cls(id + 'Prob')
-          const $poolSize = $.cls(id + 'PoolSize')
-
-          const ncTokenBalance = ethVal(await token.balanceOf(pool.address))
-          const wethBalance = ethVal(await WETH.balanceOf(pool.address))
-
-          const price = wethBalance / ncTokenBalance
-
-          if (id !== 'predict') {
-            priceSum += price
-            lqSum += ncTokenBalance
-          }
-
-          $price.forEach(p => p.innerHTML = (10000 * price).toFixed(2))
-          $price2.forEach(p => p.innerHTML = price.toFixed(6))
-          $price3.forEach(p => p.innerHTML = (10000 * price).toFixed(6))
-          $prob.forEach(p => p.innerHTML = (1000000 * price).toFixed(2) + '<span class="growShrink" style="margin-left: 0.25em; animation-delay: -0.5s">%</span>')
-          $poolSize.forEach(p => p.innerHTML = fmtBalance(ncTokenBalance))
-        }
-
-        $.id('priceSum').innerHTML = (priceSum*10000).toFixed(6)
-        $.id('lqSum').innerHTML = fmtBalance(lqSum)
-
-      }, 6000)
-
-      setRunInterval(() => {
-        $.id('lastUpdated').innerHTML = Math.round((Date.now() - lastUpdated)/1000)
-      }, 1000)
-
-      // TODO last updated s
-
-      setLinks()
-
-
-/*
-// SWAP
-
-
-
-function swap(
-    address recipient,
-    bool zeroForOne,             // true if swapping token0 for token1, false otherwise
-    int256 amountSpecified,      // positive for exact input swaps, negative for exact output swaps
-    uint160 sqrtPriceLimitX96,   // price limit (optional)
-    bytes calldata data          // callback data (for flash swaps or custom behavior)
-) external returns (int256 amount0, int256 amount1);
-
-
-// token0: number coin
-// token1: WETH
-
-1. approve spending of WETH token
-
-BUYING 1ETH worth
-  recipient: me
-  zeroForOne: false
-  amountSpecified: 1000000000000000000
-  sqrtPriceLimitX96: 0
-  data: ''
-
-1. approve spending of NC token
-SELLING 1ETH worth of NC
-  recipient: me
-  zeroForOne: true
-  amountSpecified: -1000000000000000000
-  sqrtPriceLimitX96: 0
-  data: ''
-
-
-
-
-
-*/
 
 
 
@@ -1530,6 +1441,107 @@ SELLING 1ETH worth of NC
       renderBalances()
 
 
+
+      const poolPairs = [
+        [ONE, ONE_POOL, 'one'],
+        [TWO, TWO_POOL, 'two'],
+        [THREE, THREE_POOL, 'three'],
+        [FOUR, FOUR_POOL, 'four'],
+        [FIVE, FIVE_POOL, 'five'],
+        [PredictTheNumber, PREDICT_POOL, 'predict'],
+      ]
+
+      let lastUpdated
+      setRunInterval(async () => {
+        lastUpdated = Date.now()
+        let priceSum = 0
+        let balanceSum = 0
+        let lqSum = 0
+
+        for (let [token, pool, id] of poolPairs) {
+          const $price = $.cls(id + 'Price')
+          const $price2 = $.cls(id + 'Price2')
+          const $price3 = $.cls(id + 'Price3')
+          const $prob = $.cls(id + 'Prob')
+          const $poolSize = $.cls(id + 'PoolSize')
+
+          const ncTokenBalance = ethVal(await token.balanceOf(pool.address))
+          const wethBalance = ethVal(await WETH.balanceOf(pool.address))
+
+          const price = wethBalance / ncTokenBalance
+
+          if (id !== 'predict') {
+            priceSum += price
+            lqSum += ncTokenBalance
+          }
+
+          $price.forEach(p => p.innerHTML = (10000 * price).toFixed(2))
+          $price2.forEach(p => p.innerHTML = price.toFixed(6))
+          $price3.forEach(p => p.innerHTML = (10000 * price).toFixed(6))
+          $prob.forEach(p => p.innerHTML = (1000000 * price).toFixed(2) + '<span class="growShrink" style="margin-left: 0.25em; animation-delay: -0.5s">%</span>')
+          $poolSize.forEach(p => p.innerHTML = fmtBalance(ncTokenBalance))
+        }
+
+        $.id('priceSum').innerHTML = (priceSum*10000).toFixed(6)
+        $.id('lqSum').innerHTML = fmtBalance(lqSum)
+
+        renderBalances()
+      }, 6000)
+
+      setRunInterval(() => {
+        $.id('lastUpdated').innerHTML = Math.round((Date.now() - lastUpdated)/1000)
+      }, 1000)
+
+      // TODO last updated s
+
+      setLinks()
+
+
+/*
+// SWAP
+
+
+
+function swap(
+    address recipient,
+    bool zeroForOne,             // true if swapping token0 for token1, false otherwise
+    int256 amountSpecified,      // positive for exact input swaps, negative for exact output swaps
+    uint160 sqrtPriceLimitX96,   // price limit (optional)
+    bytes calldata data          // callback data (for flash swaps or custom behavior)
+) external returns (int256 amount0, int256 amount1);
+
+
+// token0: number coin
+// token1: WETH
+
+1. approve spending of WETH token
+
+BUYING 1ETH worth
+  recipient: me
+  zeroForOne: false
+  amountSpecified: 1000000000000000000
+  sqrtPriceLimitX96: 0
+  data: ''
+
+1. approve spending of NC token
+SELLING 1ETH worth of NC
+  recipient: me
+  zeroForOne: true
+  amountSpecified: -1000000000000000000
+  sqrtPriceLimitX96: 0
+  data: ''
+
+
+
+
+
+*/
+
+
+
+
+
+
       function lqdFunctions(n) {
         const $createInput = $.id('createInput' + n)
         const $createSubmit = $.id('createSubmit' + n)
@@ -1605,7 +1617,7 @@ SELLING 1ETH worth of NC
             const tx = await PredictTheNumber.redeem(toETH(redeemAmount))
             $redeemMessage.innerHTML = `<span class="blinkSlow">TX Pending.</span> <a href="${etherscanLink}/tx/${tx.hash}" target="_blank" rel="nofollow">View on etherscan</a>`
             const txReciept1 = await tx.wait(1)
-            $createInput.value = ''
+            $$redeemInput.value = ''
             $redeemMessage.innerHTML = `Success`
             setTimeout(() => {
               $redeemMessage.innerHTML = ``

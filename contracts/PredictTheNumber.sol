@@ -1,5 +1,28 @@
 // SPDX-License-Identifier: MIT
 
+/*
+
+    ____                ___      __
+   / __ \________  ____/ (_)____/ /_
+  / /_/ / ___/ _ \/ __  / / ___/ __/
+ / ____/ /  /  __/ /_/ / / /__/ /_
+/_/___/_/_  \___/\__,_/_/\___/\__/          __
+ /_  __/ /_  ___     / | / /_  ______ ___  / /_  ___  _____
+  / / / __ \/ _ \   /  |/ / / / / __ `__ \/ __ \/ _ \/ ___/
+ / / / / / /  __/  / /|  / /_/ / / / / / / /_/ /  __/ /
+/_/ /_/ /_/\___/  /_/ |_/\__,_/_/ /_/ /_/_.___/\___/_/
+   ___   ___      _____    __ __     ______
+  <  /  |__ \    |__  /   / // /    / ____/
+  / /   __/ /     /_ <   / // /_   /___ \
+ / /   / __/    ___/ /  /__  __/  ____/ /
+/_/   /____/   /____/     /_/    /_____/
+
+
+by steviep.eth
+2024
+
+*/
+
 import "./Dependencies.sol";
 import "./NumberCoin.sol";
 
@@ -96,7 +119,8 @@ contract PredictTheNumber is Ownable, ERC20 {
 
 
 
-  // FREE FLASH LOANS
+  // FREE FLASH LOANS!
+
   bool transient loanActive;
   bool public flashLoansEnabled = false;
 
@@ -112,10 +136,10 @@ contract PredictTheNumber is Ownable, ERC20 {
 
   function enableFlashLoans(bool f) external onlyOwner {
     flashLoansEnabled = f;
-
     emit FlashLoansEnabled(f);
   }
 
+  // All flashloan and repayment logic should be defined in the receipient's `receive` function
   function flashLoan(uint256 amount, address recipient) external {
     require(flashLoansEnabled, 'Flash loans not enabled');
     require(TheNumber == 0, 'Number already picked');
