@@ -1322,7 +1322,12 @@
   const addUniswapTradeLink = c => l => {
     l.target = '_blank'
     l.rel = 'nofollow'
-    l.href = `${uniswapURL}/swap?outputCurrency=${CONTRACTS[c].addr[activeChain]}&inputCurrency=ETH${uniswapChain}`
+    const ch =
+      activeChain === 'mainnet' ? 'ethereum' :
+      activeChain === 'sepolia' ? 'ethereum_sepolia' :
+      activeChain
+
+    l.href = `${uniswapURL}/explore/tokens/${ch}/${CONTRACTS[c].addr[activeChain]}?inputCurrency=ETH`
   }
 
   const addUniswapLPLink = c => l => {
