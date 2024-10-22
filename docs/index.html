@@ -1679,7 +1679,7 @@ SELLING 1ETH worth of NC
             const tx = await PredictTheNumber.redeem(toETH(redeemAmount))
             $redeemMessage.innerHTML = `<span class="blinkSlow">TX Pending.</span> <a href="${etherscanLink}/tx/${tx.hash}" target="_blank" rel="nofollow">View on etherscan</a>`
             const txReciept1 = await tx.wait(1)
-            $$redeemInput.value = ''
+            $redeemInput.value = ''
             $redeemMessage.innerHTML = `Success`
             setTimeout(() => {
               $redeemMessage.innerHTML = ``

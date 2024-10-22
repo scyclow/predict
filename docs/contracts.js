@@ -139,7 +139,6 @@ export const CONTRACTS = {
   PREDICT_POOL: {
     addr: {
       local: '',
-      // TODO ->
       sepolia: '0x9EecF47AFB6A3aC22B86F71E53E650Aa74b1F358',
       base: '0xA40e90684985108E4657D35C3777e2795Cf09FDe'
       // baseSepolia: '',
