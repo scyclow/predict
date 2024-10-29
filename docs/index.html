@@ -1293,7 +1293,7 @@
 
 
 <script type="module">
-
+/*
   import {$} from './$.js'
   import {CONTRACTS} from './contracts.js'
   import {provider, etherscanAddr, bnToN, txValue, ethVal, isENS, ZERO_ADDR} from './eth.js'
@@ -1559,45 +1559,6 @@
       setLinks()
 
 
-/*
-// SWAP
-
-
-
-function swap(
-    address recipient,
-    bool zeroForOne,             // true if swapping token0 for token1, false otherwise
-    int256 amountSpecified,      // positive for exact input swaps, negative for exact output swaps
-    uint160 sqrtPriceLimitX96,   // price limit (optional)
-    bytes calldata data          // callback data (for flash swaps or custom behavior)
-) external returns (int256 amount0, int256 amount1);
-
-
-// token0: number coin
-// token1: WETH
-
-1. approve spending of WETH token
-
-BUYING 1ETH worth
-  recipient: me
-  zeroForOne: false
-  amountSpecified: 1000000000000000000
-  sqrtPriceLimitX96: 0
-  data: ''
-
-1. approve spending of NC token
-SELLING 1ETH worth of NC
-  recipient: me
-  zeroForOne: true
-  amountSpecified: -1000000000000000000
-  sqrtPriceLimitX96: 0
-  data: ''
-
-
-
-
-
-*/
 
 
 
@@ -1745,6 +1706,7 @@ SELLING 1ETH worth of NC
     $(element, 'display', 'none')
   }
 
+*/
 
 </script>
 </html>
